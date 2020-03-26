@@ -1,0 +1,23 @@
+La entrega podrá realizarse hasta el viernes 10/04/19 a las 23:59 hs.
+
+• Se deberá entregar en el EVA del curso un archivo con nombre <número de grupo>_lab0.zip (o tar.gz) que contenga:
+
+• El código fuente de los dos ejercicios.
+
+• Un archivo makefile, que permita compilar y ejecutar el código, independiente de cualquier entorno de desarrollo integrado (IDE).
+
+• Un archivo denominado resp_lab0.txt, con las respuestas a las preguntas planteadas en el ejercicio 2.
+
+• Un archivo integrantes.txt, con los nombres y correos electrónicos institucionales (@fing.edu.uy) de cada uno de los miembros del grupo.
+
+• El código junto con el makefile se probarán en las salas linux de facultad, por lo tanto se recomienda que antes de entregar verifiquen que lo entregado corra en este ambiente.
+
+• Las entregas que no cumplan estos requerimientos no serán consideradas. El hecho de no realizar una entrega implica la insuficiencia del laboratorio completo.
+
+
+Con este laboratorio se espera que el estudiante adquiera competencias en la implementación de
+operaciones básicas, el uso básico del lenguaje C++ (que se usará en el laboratorio) y el entorno de
+programación en linux, así como reafirmar conceptos presentados en el curso [1]. 
+
+También se espera que el estudiante consulte el material disponible en el EVA del curso y que recurra a Internet con
+espíritu crítico, identificando y corroborando fuentes confiables de información.

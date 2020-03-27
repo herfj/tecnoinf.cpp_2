@@ -34,27 +34,27 @@ int main()
         cin >> op;
 
         switch(op){
-            0:
+            case 0:
                 exit=true;
                 break;
-            1:
+            case 1:
                 break;
-            2:
+            case 2:
 
                 break;
-            3:
+            case 3:
 
                 break;
-            4:
+            case 4:
 
                 break;
-            5:
+            case 5:
 
                 break;
-            6:
+            case 6:
 
                 break;
-            7:
+            case 7:
 
                 break;
             deafult:
@@ -64,7 +64,7 @@ int main()
     }
 
     //------
-    
+
     return 0;
-    
+
 }

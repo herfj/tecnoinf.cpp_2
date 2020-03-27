@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1585341897 source:c:\users\administrador\downloads\g1_lab0-master\main.cpp
+	<iostream>
+	<string.h>
+	"definiciones.h"
+
+1585343883 c:\users\administrador\downloads\g1_lab0-master\definiciones.h
+

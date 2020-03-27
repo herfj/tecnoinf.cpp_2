@@ -9,11 +9,7 @@ typedef struct{
     int anio;
 }DtFecha;
 
-typedef struct{
-    DtFecha fecha;
-    int duracion;
-    int distancia;
-}DtViajeBase;
+
 
 //Enums
 
@@ -28,7 +24,7 @@ class Usuario{
         string cedula;
         string nombre;
         DtFecha fechaIngreso;
-        Viaje MisViajes[100];
+        //Viaje MisViajes[100];
     public:
         void setter (string ci, string nom, DtFecha f){
             fechaIngreso.anio=f.anio;
@@ -39,12 +35,13 @@ class Usuario{
         }
 };
 
-class Viaje{
-    private:
+class Viajebase{
+private:
+    public:
+    protected:
         DtFecha fecha;
         int duracion;
         int distancia;
-    public:
 
     void setter(DtFecha f, int dcion, int dist){
         fecha.anio=f.anio;
@@ -56,16 +53,31 @@ class Viaje{
 
 };
 
+class Viaje : public Viajebase{
+private: float precio;
+        class Vehiculo *vehiculo;
+public:
+};
+
 class Vehiculo{
+    private:
 
+    protected:
+        int nroSerie;
+        float PorcentajeBateria;
+        float PrecioBase;
+        virtual float darprecioviaje(int du,int di);
 };
 
-class Monopatin : Vehiculo{
-
+class Monopatin : public Vehiculo{
+private: bool tieneluces;
+public:virtual float darprecioviaje(int du,int di);
 };
 
-class Bicicleta : Vehiculo{
-    
+class Bicicleta : public Vehiculo{
+private: TipoBici t;
+         int cantcambios;
+public:virtual float darprecioviaje(int du,int di);
 };
 
 #endif // DEFINCIONES_H_INCLUDED

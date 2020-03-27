@@ -9,8 +9,6 @@ typedef struct{
     int anio;
 }DtFecha;
 
-
-
 //Enums
 
 typedef enum _TipoBici{
@@ -35,9 +33,11 @@ class Usuario{
         }
 };
 
-class Viajebase{
-private:
+class ViajeBase{
+    private:
+    
     public:
+
     protected:
         DtFecha fecha;
         int duracion;
@@ -53,10 +53,13 @@ private:
 
 };
 
-class Viaje : public Viajebase{
-private: float precio;
+class Viaje : public ViajeBase{
+    private: 
+        float precio;
         class Vehiculo *vehiculo;
-public:
+    
+    public:
+
 };
 
 class Vehiculo{
@@ -70,14 +73,22 @@ class Vehiculo{
 };
 
 class Monopatin : public Vehiculo{
-private: bool tieneluces;
-public:virtual float darprecioviaje(int du,int di);
+    private: 
+        bool tieneluces;
+    public:
+        virtual float darprecioviaje(int du,int di){
+
+        };
 };
 
 class Bicicleta : public Vehiculo{
-private: TipoBici t;
+    private: 
+        TipoBici t;
          int cantcambios;
-public:virtual float darprecioviaje(int du,int di);
+    public:
+        virtual float darprecioviaje(int du,int di){
+
+        };
 };
 
 #endif // DEFINCIONES_H_INCLUDED

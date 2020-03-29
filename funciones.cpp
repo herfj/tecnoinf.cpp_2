@@ -445,5 +445,7 @@ DtFecha fecha_reg (){
         fechaing.anio= timex->tm_year + 1900;
         fechaing.mes= timex->tm_mon + 1;
         fechaing.dia= timex->tm_mday;
+        //el cout q me pidio el cacique hernan
+        cout << "Hora:Min:Sec: : " << timex->tm_hour <<":"<< timex->tm_min << ":" << timex->tm_sec << endl;
     return fechaing;
 }

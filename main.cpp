@@ -61,7 +61,7 @@ int main()
             case 7:
 
                 break;
-            deafult:
+            default:
                 cout<<"El numero que ingreso no es valido. Intente de nuevo."<<endl;
         }
 

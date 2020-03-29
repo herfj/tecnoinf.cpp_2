@@ -1,5 +1,11 @@
 #ifndef DEFINCIONES_H_INCLUDED
 #define DEFINCIONES_H_INCLUDED
+#include <string.h>
+
+//CONSTANTES
+
+#define MAX_U 10
+#define MAX_V 10
 
 //Structs
 
@@ -18,48 +24,83 @@ typedef enum _TipoBici{
 //Classes
 
 class Usuario{
+
     private:
         string cedula;
         string nombre;
         DtFecha fechaIngreso;
-        //Viaje MisViajes[100];
+        class Viaje *MisViajes[100];
     public:
-        void setter (string ci, string nom, DtFecha f){
+
+        //Constructor
+        Usuario(){
+            cedula="";
+            nombre="";
+        }
+
+        //Setters
+        void setter_ci (string ci){
+            cedula=ci;
+        }
+        void setter_n (string nom){
+            nombre=nom;
+        }
+        void setter_f (DtFecha f){
             fechaIngreso.anio=f.anio;
             fechaIngreso.dia=f.dia;
             fechaIngreso.mes=f.mes;
-            nombre=nom;
-            cedula=ci;
+        }
+
+        //Getters
+        string getter_ci()
+        {
+            return cedula;
+        }
+        string getter_n()
+        {
+            return nombre;
+        }
+        DtFecha getter_f()
+        {
+            return fechaIngreso;
         }
 };
 
 class ViajeBase{
+
     private:
-    
-    public:
 
     protected:
         DtFecha fecha;
         int duracion;
         int distancia;
 
-    void setter(DtFecha f, int dcion, int dist){
-        fecha.anio=f.anio;
-        fecha.dia=f.dia;
-        fecha.mes=f.mes;
-        duracion=dcion;
-        distancia=dist;
-    }
-
-};
-
-class Viaje : public ViajeBase{
-    private: 
-        float precio;
-        class Vehiculo *vehiculo;
-    
     public:
+        //Constructor
 
+        //Setters
+        void setter_f(DtFecha f){
+            fecha.anio=f.anio;
+            fecha.dia=f.dia;
+            fecha.mes=f.mes;
+        }
+        void setter_dur(int dur){
+            duracion=dur;
+        }
+        void setter_dis(int dis){
+            distancia=dis;
+        }
+
+        //Getters
+        DtFecha getter_f(){
+            return fecha;
+        }
+        int getter_dur(){
+            return duracion;
+        }
+        int getter_dis(){
+            return distancia;
+        }
 };
 
 class Vehiculo{
@@ -67,28 +108,137 @@ class Vehiculo{
 
     protected:
         int nroSerie;
-        float PorcentajeBateria;
-        float PrecioBase;
-        virtual float darprecioviaje(int du,int di);
+        float porcentajeBateria;
+        float precioBase;
+        virtual float DarPrecioViaje(int dur,int dis){};
+    public:
+
+        //Setters
+        void setter_nroS(int nroS){
+            nroSerie=nroS;
+        }
+        void setter_porB(float porB){
+            porcentajeBateria=porB;
+        }
+        void setter_pB(float pB){
+            precioBase=pB;
+        }
+
+        //Getters
+        int getter_nroS(){
+            return nroSerie;
+        }
+        float getter_porB(){
+            return porcentajeBateria;
+        }
+        float get_pB(){
+            return precioBase;
+        }
 };
 
 class Monopatin : public Vehiculo{
-    private: 
-        bool tieneluces;
-    public:
-        virtual float darprecioviaje(int du,int di){
 
-        };
+    private:
+        bool tieneLuces;
+
+    public:
+
+        //Cosntructor
+
+        Monopatin(int nroS, float porB, float pB, bool tL){
+            tieneLuces=tL;
+            nroSerie=nroS;
+            porcentajeBateria=porB;
+            precioBase=pB;
+        }
+
+        float DarPrecioViaje(int dur,int dis){
+            float totalPrecio;
+            if(tieneLuces)
+            {
+                totalPrecio=0.5*dur + dis* precioBase;
+            }
+            else
+            {
+                totalPrecio=dis*precioBase;
+            }
+            return totalPrecio;
+        }
+
+        //Setters
+        void setter_tl(bool tL){
+            tieneLuces=tL;
+        }
+
+        //Getters
+        bool getter_tl(){
+            return tieneLuces;
+        }
 };
 
 class Bicicleta : public Vehiculo{
-    private: 
-        TipoBici t;
-         int cantcambios;
-    public:
-        virtual float darprecioviaje(int du,int di){
 
-        };
+    private:
+        TipoBici tipobici;
+        int cantcambios;
+
+    public:
+
+        //Cosntructor
+        Bicicleta (int nroS, float porB, float pB, TipoBici tpB){
+            tipobici=tpB;
+            nroSerie=nroS;
+            porcentajeBateria=porB;
+            precioBase=pB;
+        }
+
+        float DarPrecioViaje(int dis)
+        {
+            float totalPrecio;
+            totalPrecio=precioBase*dis;
+
+            return totalPrecio;
+        }
+
+        //Seetters
+        void setter(TipoBici tpB){
+            tipobici=tpB;
+        }
+
+        //Getters
+        TipoBici getter_tipoB(){
+            return tipobici;
+        }
 };
+
+class Viaje : public ViajeBase{
+    private:
+        float totalPrecio;
+        Vehiculo* vehiculo;
+    public:
+
+        //Constructor
+        Viaje(DtFecha f,int dur, int dis, Vehiculo *v){
+            fecha.anio=f.anio;
+            fecha.dia=f.dia;
+            fecha.mes=f.mes;
+            duracion=dur;
+            distancia=dis;
+            //totalPrecio=(*v).DarPrecioViaje(duracion, distancia);
+            //vehiculo=(*v);
+        }
+
+        //Setters
+        void setter_p(class Vehiculo *v){
+            //totalPrecio=*v->DarPrecioViaje(duracion, distancia);
+            //vehiculo=(*v);
+        }
+
+        //Getters
+        float getter_p(){
+            return totalPrecio;
+        }
+};
+
 
 #endif // DEFINCIONES_H_INCLUDED

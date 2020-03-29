@@ -1,23 +1,27 @@
 #include <iostream>
 #include <string.h>
 #include <ctime>
-#include <unistd.h>
+
 
 using namespace std;
 
 //.h & .cpp
 #include "definiciones.h"
-#include "funciones.cpp"
+
 
 int main()
 {
+
 
     //------
 
     int op=-1;
     bool exit=false;
-    string param_string1="";
-    string param_string2="";
+
+    //------
+
+    Usuario a_Usuarios[MAX_U];
+    Vehiculos a_Vehiculos[MAX_V];
 
     //------
 
@@ -39,9 +43,11 @@ int main()
                 exit=true;
                 break;
             case 1:
-                param_string1=SolicitarNombre();
-                param_string2=SolicitarCedula();
-                RegistrarUsuario(param_string1,param_string2);
+                string nombre;
+                string nombre="";
+                cout << "Registrar usuario" << endl;
+                cout << "     "<<"Ingresa nombre:" << endl;
+                cin>> nombre;
                 break;
             case 2:
 
@@ -73,3 +79,6 @@ int main()
 
 }
 
+void RegistrarUsuario(string ci, string nombre){
+
+}

@@ -35,6 +35,9 @@
 		<Unit filename="definiciones.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="funciones.cpp">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

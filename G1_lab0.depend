@@ -1,8 +1,19 @@
 # depslib dependency file v1.0
-1585341897 source:c:\users\administrador\downloads\g1_lab0-master\main.cpp
+1585365596 source:c:\users\administrador\downloads\g1_lab0-master\main.cpp
 	<iostream>
 	<string.h>
+	<ctime>
 	"definiciones.h"
 
-1585343883 c:\users\administrador\downloads\g1_lab0-master\definiciones.h
+1585368879 c:\users\administrador\downloads\g1_lab0-master\definiciones.h
+	<string.h>
+
+1585439658 source:c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\main.cpp
+	<iostream>
+	<string.h>
+	<ctime>
+	"definiciones.h"
+
+1585439871 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\definiciones.h
+	<string.h>
 

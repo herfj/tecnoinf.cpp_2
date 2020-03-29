@@ -21,6 +21,22 @@ typedef enum _TipoBici{
     PASEO, MONTANIA
 }TipoBici;
 
+
+//Declaraciones
+
+string SolicitarNombre();
+string SolicitarCedula();
+void RegistrarUsuario(string nombre, string ci);
+void ConfirmacionUsuario(string nombre, string ci);
+void printUsuarios();
+int SolicitarNroSerieVehiculo();
+float SolicitarPorcentajeVehiculo();
+float SolicitarPrecioBaseVehiculo();
+void RegistrarVehiculo(int nroSerie,float porcentaje,float precioBase);
+void ConfirmacionMonopatin(int nroSerie, float por, float precioBase, bool luces);
+void ConfirmacionBici(int nroSerie, float por, float precioBase, TipoBici tB, int cantCambios);
+DtFecha fecha_reg ();
+
 //Classes
 
 class Usuario{
@@ -36,6 +52,8 @@ class Usuario{
         Usuario(){
             cedula="";
             nombre="";
+            fechaIngreso=fecha_reg();
+            //aca dentro va la fecha se define
         }
 
         //Setters
@@ -76,7 +94,6 @@ class ViajeBase{
         int distancia;
 
     public:
-        //Constructor
 
         //Setters
         void setter_f(DtFecha f){
@@ -113,6 +130,9 @@ class Vehiculo{
         virtual float DarPrecioViaje(int dur,int dis){};
     public:
 
+        //Constructores
+
+
         //Setters
         void setter_nroS(int nroS){
             nroSerie=nroS;
@@ -134,6 +154,7 @@ class Vehiculo{
         float get_pB(){
             return precioBase;
         }
+
 };
 
 class Monopatin : public Vehiculo{
@@ -185,11 +206,12 @@ class Bicicleta : public Vehiculo{
     public:
 
         //Cosntructor
-        Bicicleta (int nroS, float porB, float pB, TipoBici tpB){
+        Bicicleta (int nroS, float porB, float pB, TipoBici tpB, int cambios){
             tipobici=tpB;
             nroSerie=nroS;
             porcentajeBateria=porB;
             precioBase=pB;
+            cantcambios=cambios;
         }
 
         float DarPrecioViaje(int dis)
@@ -239,6 +261,9 @@ class Viaje : public ViajeBase{
             return totalPrecio;
         }
 };
+
+
+
 
 
 #endif // DEFINCIONES_H_INCLUDED

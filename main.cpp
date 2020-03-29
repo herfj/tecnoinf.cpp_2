@@ -1,5 +1,5 @@
-#include <iostream>
-#include <string.h>
+#include <iostream>   
+#include <string.h> 
 #include <ctime>
 #include <unistd.h>
 
@@ -11,13 +11,15 @@ using namespace std;
 
 int main()
 {
-
     //------
 
     int op=-1;
     bool exit=false;
     string param_string1="";
     string param_string2="";
+    int param_int;
+    float param_float1;
+    float param_float2;
 
     //------
 
@@ -44,7 +46,11 @@ int main()
                 RegistrarUsuario(param_string1,param_string2);
                 break;
             case 2:
-
+                param_int=SolicitarNroSerieVehiculo();
+                param_float1=SolicitarPorcentajeVehiculo();
+                param_float2=SolicitarPrecioBaseVehiculo();
+                RegistrarVehiculo(param_int, param_float1, param_float2);
+                
                 break;
             case 3:
 
@@ -61,8 +67,9 @@ int main()
             case 7:
 
                 break;
-            default:
-                cout<<"El numero que ingreso no es valido. Intente de nuevo."<<endl;
+            deafult:
+                throw std::invalid_argument("El numero que ingreso no es valido. Intente de nuevo.");
+                //cout<<"El numero que ingreso no es valido. Intente de nuevo."<<endl;
         }
 
     }

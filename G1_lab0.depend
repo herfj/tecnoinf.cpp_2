@@ -8,12 +8,17 @@
 1585368879 c:\users\administrador\downloads\g1_lab0-master\definiciones.h
 	<string.h>
 
-1585439658 source:c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\main.cpp
+1585443083 source:c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\main.cpp
 	<iostream>
 	<string.h>
 	<ctime>
+	<unistd.h>
 	"definiciones.h"
+	"funciones.cpp"
 
-1585439871 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\definiciones.h
+1585441882 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\definiciones.h
 	<string.h>
+
+1585445017 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\funciones.cpp
+	"definiciones.h"
 

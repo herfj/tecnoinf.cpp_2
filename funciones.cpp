@@ -9,11 +9,12 @@ string SolicitarNombre();
 string SolicitarCedula();
 void RegistrarUsuario(string nombre, string ci);
 void ConfirmacionUsuario(string nombre, string ci);
+void printUsuarios();
 
 //Variables Globales
-Usuario a_Usuarios[MAX_U];
+Usuario *a_Usuarios[MAX_U];
 int cant_usuarios=0;
-Vehiculo a_Vehiculos[MAX_V];
+Vehiculo *a_Vehiculos[MAX_V];
 int cant_vahiculos=0;
 
 string SolicitarNombre(){
@@ -112,22 +113,36 @@ string SolicitarCedula(){
 void RegistrarUsuario(string nombre, string ci){
 
     bool match=false;
+    bool stop=false;
     int i=0;
 
-    while((match==false)&&(i<MAX_U))
+    while(((match==false)&&(stop==false))&&(i<MAX_U))
     {
-        if(a_Usuarios[i].getter_ci()==ci){
-            match=true;
+        if(a_Usuarios[i]==NULL){
+            stop=true;
         }
         else{
-            i++;
+            if(a_Usuarios[i]->getter_ci()==ci){
+                match=true;
+            }
+            else{
+                i++;
+            }
         }
     }
     if(match==false){
-        a_Usuarios[cant_usuarios].setter_ci(ci);
-        a_Usuarios[cant_usuarios].setter_n(nombre);
-        ConfirmacionUsuario(nombre,ci);
-        cant_usuarios++;
+        if(cant_usuarios<MAX_U)
+        {
+            Usuario *u = new Usuario();
+            u->setter_ci(ci);
+            u->setter_n(nombre);
+            a_Usuarios[cant_usuarios]=u;
+            ConfirmacionUsuario(nombre,ci);
+            cant_usuarios++;
+        }
+        else{
+
+        }
     }
     else{
         cout<<"Esto no es una excepcion pero ya eexiste la ci"<<endl;
@@ -135,6 +150,23 @@ void RegistrarUsuario(string nombre, string ci){
     sleep(3);
     system("CLS");
 
+}
+
+void printUsuarios(){
+
+    bool stop=false;
+    int i=0;
+
+    while(((stop==false))&&(i<MAX_U))
+    {
+        if(a_Usuarios[i]==NULL){
+            stop=true;
+        }
+        else{
+            cout<<a_Usuarios[i]->getter_ci()<<" - "<<a_Usuarios[i]->getter_n()<<endl;
+            i++;
+        }
+    }
 }
 
 void ConfirmacionUsuario(string nombre, string ci){

@@ -24,18 +24,23 @@ typedef enum _TipoBici{
 
 //Declaraciones
 
+
+//Registro Usuarios
 string SolicitarNombre();
 string SolicitarCedula();
 void RegistrarUsuario(string nombre, string ci);
 void ConfirmacionUsuario(string nombre, string ci);
 void printUsuarios();
+
+//AgregarVehiculo
 int SolicitarNroSerieVehiculo();
 float SolicitarPorcentajeVehiculo();
 float SolicitarPrecioBaseVehiculo();
-void RegistrarVehiculo(int nroSerie,float porcentaje,float precioBase);
+void AgregarVehiculo(int nroSerie,float porcentaje,float precioBase);
 void ConfirmacionMonopatin(int nroSerie, float por, float precioBase, bool luces);
 void ConfirmacionBici(int nroSerie, float por, float precioBase, TipoBici tB, int cantCambios);
 DtFecha fecha_reg ();
+void printV();
 
 //Classes
 
@@ -151,7 +156,7 @@ class Vehiculo{
         float getter_porB(){
             return porcentajeBateria;
         }
-        float get_pB(){
+        float getter_pB(){
             return precioBase;
         }
 

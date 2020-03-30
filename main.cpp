@@ -1,5 +1,5 @@
-#include <iostream>   
-#include <string.h> 
+#include <iostream>
+#include <string.h>
 #include <ctime>
 #include <unistd.h>
 
@@ -49,14 +49,14 @@ int main()
                 param_int=SolicitarNroSerieVehiculo();
                 param_float1=SolicitarPorcentajeVehiculo();
                 param_float2=SolicitarPrecioBaseVehiculo();
-                RegistrarVehiculo(param_int, param_float1, param_float2);
-                
+                AgregarVehiculo(param_int, param_float1, param_float2);
+
                 break;
             case 3:
-
+                    printV();
                 break;
             case 4:
-
+                    printUsuarios();
                 break;
             case 5:
 

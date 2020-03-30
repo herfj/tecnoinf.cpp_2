@@ -27,12 +27,12 @@ string SolicitarNombre(){
     //------
 
     system("CLS");
+    cout << "Registrar usuario" << endl;
     do{
         param_string1="";
         again=false;
         again2=false;
 
-        cout << "Registrar usuario" << endl;
         cout << "     "<<"Ingresa nombre:" << endl;
         cout << "     ";
         cin>> param_string1;
@@ -70,6 +70,9 @@ string SolicitarCedula(){
     bool again2=false;
     string param_string1="";
     char param_char;
+    bool match=false;
+    bool stop=false;
+    int i=0;
 
     //------
 
@@ -78,32 +81,52 @@ string SolicitarCedula(){
         param_string1="";
         again=false;
         again2=false;
+        i=0;
 
         cout << "     "<<"Ingresa CI:" << endl;
         cout << "     ";
         cin>> param_string1;
 
-        do{
-            again2=false;
-            cout << "          ";
-            cout << "Confirma el CI (Si=S o No=N): " << param_string1 << endl;
-            cout << "          ";
-            cin>>param_char;
-
-            if ((param_char=='s')||(param_char=='S')){
-                again=false;
+        while(((match==false)&&(stop==false))&&(i<MAX_U))
+        {
+            if(a_Usuarios[i]==NULL){
+                stop=true;
             }
             else{
-                if ((param_char=='n')||(param_char=='N')){
-                    again=true;
+                if(a_Usuarios[i]->getter_ci()==param_string1){
+                    match=true;
                 }
                 else{
-                    cout << "          ";
-                    cout<<"Ingrese una letra valida."<<endl;
-                    again2=true;
+                    i++;
                 }
             }
-        }while(again2==true);
+        }
+        if(match==false){
+            do{
+                again2=false;
+                cout << "          ";
+                cout << "Confirma el CI (Si=S o No=N): " << param_string1 << endl;
+                cout << "          ";
+                cin>>param_char;
+
+                if ((param_char=='s')||(param_char=='S')){
+                    again=false;
+                }
+                else{
+                    if ((param_char=='n')||(param_char=='N')){
+                        again=true;
+                    }
+                    else{
+                        cout << "          ";
+                        cout<<"Ingrese una letra valida."<<endl;
+                        again2=true;
+                    }
+                }
+            }while(again2==true);
+        }
+        else{
+            cout<<"Esto no es una excepcion pero ya eexiste la ci"<<endl;
+        }
     }while(again==true);
     return param_string1;
 }
@@ -214,7 +237,7 @@ int SolicitarNroSerieVehiculo(){
             }
             else
             {
-                if(a_Vehiculos[i]->getter_nroS()==nroSerie)
+                if(a_Vehiculos[i]->getter_nroS()==param_int)
                 {
                     match=true;
                 }
@@ -241,7 +264,7 @@ int SolicitarNroSerieVehiculo(){
                     }
                     else{
                         cout << "          ";
-                        cout<<"Ingrese una numero valido."<<endl;
+                        cout<<"Ingrese una opcion valida."<<endl;
                         again2=true;
                     }
                 }
@@ -260,15 +283,38 @@ float SolicitarPorcentajeVehiculo(){
     //------
 
     bool again=false;
-    float param_float   ;
-
+    bool again2=false;
+    float param_float;
+    char param_char;
     //------
     cout << "     ";
-    cout << "Ingrese el porcentaje de bateria del vehiculo(debe ser positivo y menor o igual a 100)" << endl;
+    cout << "Ingresa el Porcentaje de Bateria del vehiculo (debe ser positivo y menor o igual a 100):" << endl;
     do{
         again=false;
         cout << "     ";
         cin >> param_float;
+        do{
+
+            again2=false;
+            cout << "          ";
+            cout << "Confirma el Porcentaje de Bateria (Si=S o No=N): " << param_float << endl;
+            cout << "          ";
+            cin>>param_char;
+
+            if ((param_char=='s')||(param_char=='S')){
+                again=false;
+            }
+            else{
+                if ((param_char=='n')||(param_char=='N')){
+                    again=true;
+                }
+                else{
+                    cout << "          ";
+                    cout<<"Ingrese una opcion valida."<<endl;
+                    again2=true;
+                }
+            }
+        }while(again2==true);
         if((param_float<101) && (param_float>-1)){
             return param_float;
         }
@@ -299,7 +345,6 @@ float SolicitarPrecioBaseVehiculo(){
         again=false;
         again2=false;
 
-        cout << "Registrar vehiculo" << endl;
         cout << "     "<<"Ingresa Precio Base:" << endl;
         cout << "     ";
         cin>> param_float;
@@ -318,6 +363,10 @@ float SolicitarPrecioBaseVehiculo(){
             else{
                 if ((param_char=='n')||(param_char=='N')){
                     again=true;
+                }
+                else{
+                    again2=true;
+                    cout<<"Ingrese una opcion valida."<<endl;
                 }
             }
             if (param_float<=0){
@@ -340,8 +389,10 @@ void AgregarVehiculo(int nroSerie,float porcentaje,float precioBase){
     bool luces=false;
     int i=0;
     char v;
+    int cambiios;
     TipoBici tipo;
     int cambios;
+    bool again=false;
 
     //------
 
@@ -363,97 +414,114 @@ void AgregarVehiculo(int nroSerie,float porcentaje,float precioBase){
             }
         }
     }
-    if(match==false)
-    {
+    if(match==false){
         cout << "     ";
-        cout << "Desea registrar es un monopatin (S). Ponga (N) para bici" << endl;
-        cout << "     ";
-        cin >> v;
-        if(v=='S' || v=='s')
-        {
-            cout << "     ";
-            cout << "El monopatin tiene luces? S o N" << endl;
+        cout << "Desea registrar: Monopatin (M) o Bicicleta (B)" << endl;
+        do{
+            again=false;
             cout << "     ";
             cin >> v;
-            do
+            if((v=='M') || (v=='m'))
             {
-                if(v=='S' || v=='s')
+                cout << "     ";
+                cout << "Monopatin tiene luces: S o N" << endl;
+                cout << "     ";
+                cin >> v;
+                do
                 {
-                    luces=true;
-                }
-                else
-                {
-                    if(v=='N' || v=='n')
+                    if(v=='S' || v=='s')
                     {
-                        luces=false;
+                        luces=true;
                     }
                     else
                     {
-                        cout << "     "; cout << "     ";
-                        cout << "Inserte la letra correcta" << endl;
-                        cout << "     ";
-                        cin >> v;
+                        if(v=='N' || v=='n')
+                        {
+                            luces=false;
+                        }
+                        else
+                        {
+                            cout << "          ";
+                            cout << "Ingrese opcion valida. Intente nuevamente" << endl;
+                            cout << "     ";
+                            cin >> v;
+                        }
                     }
-                }
-            }
-            while(v!='S' && v!='s' && v!='N' && v!='n');
-            if(cant_vehiculos<MAX_V)
-            {
-                Monopatin *m = new Monopatin(nroSerie,porcentaje,precioBase,luces);
-                a_Vehiculos[cant_vehiculos]=m;
-                ConfirmacionMonopatin(nroSerie, porcentaje, precioBase, luces);
-                cant_vehiculos++;
-            }
-            else
-            {
-                cout << "     ";cout << "     ";
-                cout<<"Se supera el Array"<<endl;
-            }
-        }
-        else
-        {
-            cout << "     ";
-            cout << "La bici es de PASEO(P) o MONTANIA(M)" << endl;
-            cout << "     ";
-            cin >> v;
-            do
-            {
-                if(v=='P' || v=='p')
+                } while(v!='S' && v!='s' && v!='N' && v!='n');
+                if(cant_vehiculos<MAX_V)
                 {
-                    tipo=PASEO;
+                    Monopatin *m = new Monopatin(nroSerie,porcentaje,precioBase,luces);
+                    a_Vehiculos[cant_vehiculos]=m;
+                    ConfirmacionMonopatin(nroSerie, porcentaje, precioBase, luces);
+                    cant_vehiculos++;
                 }
                 else
                 {
-                    if((v=='M') || (v=='m'))
+                    cout << "          Se supera el Array"<<endl;
+                }
+            }
+            else
+            {
+                if(v=='B' || v=='b'){
+                    cout << "     ";
+                    cout << "El tipo de Bicicleta es: PASEO(P) o MONTANIA(M)" << endl;
+                    cout << "     ";
+                    cin >> v;
+                    do
                     {
-                        tipo=MONTANIA;
+                        if((v=='P') || (v=='p'))
+                        {
+                            tipo=PASEO;
+                        }
+                        else
+                        {
+                            if((v=='M') || (v=='m'))
+                            {
+                                tipo=MONTANIA;
+                            }
+                            else
+                            {
+                                cout << "          ";
+                                cout << "Ingrese opcion valida. Intente nuevamente" << endl;
+                                cout << "     ";
+                                cin >> v;
+                            }
+                        }
+                    }while((v!='P') && (v!='p') && (v!='M') && (v!='m'));
+
+                    cout << "     ";
+                    cout << "Ingrese el numero de cambios:" << endl;
+                    do{
+                        cout << "     ";
+                        cin >> cambios;
+                        if(cambios<0){
+                            cout << "          ";
+                            cout << "Cambios no puede ser negativo. Intente nuevamente" << endl;
+                        }
+                    }while(cambios<0);
+                    if(cant_vehiculos<MAX_V)
+                    {
+                        Bicicleta *b = new Bicicleta(nroSerie,porcentaje,precioBase,tipo, cambios);
+                        a_Vehiculos[cant_vehiculos]=b;
+                        ConfirmacionBici(nroSerie, porcentaje, precioBase, tipo, cambios);
+                        cant_vehiculos++;
                     }
                     else
                     {
                         cout << "     ";cout << "     ";
-                        cout << "Ingrese una letra correcta. Intente nuevamente" << endl;
-                        cout << "     ";
-                        cin >> v;
+                        cout<<"Se supera el Array"<<endl;
                     }
                 }
-            }while((v!='P') && (v!='p') && (v!='P') && (v!='p'));
-            if(cant_vehiculos<MAX_V)
-            {
-                Bicicleta *b = new Bicicleta(nroSerie,porcentaje,precioBase,tipo, cambios);
-                a_Vehiculos[cant_vehiculos]=b;
-                ConfirmacionBici(nroSerie, porcentaje, precioBase, tipo, cambios);
-                cant_vehiculos++;
+                else{
+                    cout << "          ";
+                    cout << "Ingrese opcion valida. Intente nuevamente" << endl;
+                    again=true;
+                }
             }
-            else
-            {
-                cout << "     ";cout << "     ";
-                cout<<"Se supera el Array"<<endl;
-            }
-        }
+        }while(again==true);
     }
-    else
-    {
-        cout << "     ";cout << "     ";
+    else{
+        cout << "          ";
         cout<<"Ya existe un Vehiculo con ese nroSerie"<<endl;
     }
 }
@@ -475,12 +543,13 @@ void ConfirmacionBici(int nroSerie, float por, float precioBase, TipoBici tB, in
     cout << "     "<<"Se confirmo la creacion del Monopatin:"<<endl;;
     cout << "          "<<"Porcentaje Bateria: "<<por<<endl;
     cout << "          "<<"Precio Base: "<<precioBase<<endl;
-    if (tB==0){
+    if (tB==1){
         cout << "          "<<"Tipo: MONTANIA"<<endl;
     }
     else {
         cout << "          "<<"Tipo: PASEO"<<endl;
     }
+    cout << "          "<<"Cantidad de Cambios: "<<cantCambios<<endl;
 
 }
 

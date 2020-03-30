@@ -33,7 +33,7 @@ int main()
         cout << "     "<<"6) CAmbiar Bateria Vehiculo" << endl;
         cout << "     "<<"7) Obtener Vehiculos" << endl;
         cout << "     "<<"0) Salir" << endl;
-
+        cout << "Opcion:" << endl;
         cin >> op;
 
         switch(op){

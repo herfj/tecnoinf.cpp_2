@@ -1,5 +1,5 @@
 #include <iostream>
-#include <unistd.h> //HOLA JACOMO bbte
+#include <unistd.h>
 #include <string.h>
 
 using namespace std;
@@ -7,40 +7,43 @@ using namespace std;
 //.h & .cpp
 #include "definiciones.h"
 
+#include "Usuario.cpp"
+#include "Viaje.cpp"
+#include "Vehiculo.cpp"
+
+
 //Variables Globales
 Usuario *a_Usuarios[MAX_U];
 int cant_usuarios=0;
 Vehiculo *a_Vehiculos[MAX_V];
 int cant_vehiculos=0;
 
-//Registro Usuario
+//Solicitar
 
-string SolicitarNombre(){
+string SolicitarString(string var){
 
     //------
 
     bool again=false;
     bool again2=false;
-    string param_string1="";
+    string param="";
     char param_char;
 
     //------
 
-    system("CLS");
-    cout << "Registrar usuario" << endl;
     do{
-        param_string1="";
+        param="";
         again=false;
         again2=false;
 
-        cout << "     "<<"Ingresa nombre:" << endl;
+        cout << "     "<<"Ingresa " << var << ":" << endl;
         cout << "     ";
-        cin>> param_string1;
+        cin>> param;
 
         do{
             again2=false;
             cout << "          ";
-            cout << "Confirma el nombre (Si=S o No=N): " << param_string1 << endl;
+            cout << "Confirma el "<< var <<" (Si=S o No=N): " << param << endl;
             cout << "          ";
             cin>>param_char;
 
@@ -59,77 +62,101 @@ string SolicitarNombre(){
             }
         }while(again2==true);
     }while(again==true);
-    return param_string1;
+    return param;
 }
 
-string SolicitarCedula(){
+int SolicitarInt(string var){
 
     //------
 
     bool again=false;
     bool again2=false;
-    string param_string1="";
+    int param=0;
     char param_char;
-    bool match=false;
-    bool stop=false;
-    int i=0;
 
     //------
 
-
     do{
-        param_string1="";
+        param=0;
         again=false;
         again2=false;
-        i=0;
 
-        cout << "     "<<"Ingresa CI:" << endl;
+        cout << "     "<<"Ingresa " << var << ":" << endl;
         cout << "     ";
-        cin>> param_string1;
+        cin>> param;
 
-        while(((match==false)&&(stop==false))&&(i<MAX_U))
-        {
-            if(a_Usuarios[i]==NULL){
-                stop=true;
+        do{
+            again2=false;
+            cout << "          ";
+            cout << "Confirma el "<< var <<" (Si=S o No=N): " << param << endl;
+            cout << "          ";
+            cin>>param_char;
+
+            if ((param_char=='s')||(param_char=='S')){
+                again=false;
             }
             else{
-                if(a_Usuarios[i]->getter_ci()==param_string1){
-                    match=true;
+                if ((param_char=='n')||(param_char=='N')){
+                    again=true;
                 }
                 else{
-                    i++;
+                    cout << "          ";
+                    cout<<"Ingrese una letra valida."<<endl;
+                    again2=true;
                 }
             }
-        }
-        if(match==false){
-            do{
-                again2=false;
-                cout << "          ";
-                cout << "Confirma el CI (Si=S o No=N): " << param_string1 << endl;
-                cout << "          ";
-                cin>>param_char;
+        }while(again2==true);
+    }while(again==true);
+    return param;
+}
 
-                if ((param_char=='s')||(param_char=='S')){
-                    again=false;
+float SolicitarFloat(string var){
+
+    //------
+
+    bool again=false;
+    bool again2=false;
+    float param=0;
+    char param_char;
+
+    //------
+
+    do{
+        param=0;
+        again=false;
+        again2=false;
+
+        cout << "     "<<"Ingresa " << var << ":" << endl;
+        cout << "     ";
+        cin>> param;
+
+        do{
+            again2=false;
+            cout << "          ";
+            cout << "Confirma el "<< var <<" (Si=S o No=N): " << param << endl;
+            cout << "          ";
+            cin>>param_char;
+
+            if ((param_char=='s')||(param_char=='S')){
+                again=false;
+            }
+            else{
+                if ((param_char=='n')||(param_char=='N')){
+                    again=true;
                 }
                 else{
-                    if ((param_char=='n')||(param_char=='N')){
-                        again=true;
-                    }
-                    else{
-                        cout << "          ";
-                        cout<<"Ingrese una letra valida."<<endl;
-                        again2=true;
-                    }
+                    cout << "          ";
+                    cout<<"Ingrese una letra valida."<<endl;
+                    again2=true;
                 }
-            }while(again2==true);
-        }
-        else{
-            cout<<"Esto no es una excepcion pero ya eexiste la ci"<<endl;
-        }
+            }
+        }while(again2==true);
     }while(again==true);
-    return param_string1;
+    return param;
 }
+
+
+//Registro Usuario
 
 void RegistrarUsuario(string nombre, string ci){
 
@@ -154,9 +181,7 @@ void RegistrarUsuario(string nombre, string ci){
     if(match==false){
         if(cant_usuarios<MAX_U)
         {
-            Usuario *u = new Usuario();
-            u->setter_ci(ci);
-            u->setter_n(nombre);
+            Usuario *u = new Usuario(ci, nombre);
             a_Usuarios[cant_usuarios]=u;
             ConfirmacionUsuario(nombre,ci);
             cant_usuarios++;
@@ -168,8 +193,7 @@ void RegistrarUsuario(string nombre, string ci){
     else{
         cout<<"Esto no es una excepcion pero ya eexiste la ci"<<endl;
     }
-    sleep(3);
-    system("CLS");
+
 }
 
 void printUsuarios(){
@@ -183,7 +207,7 @@ void printUsuarios(){
             stop=true;
         }
         else{
-            cout<<a_Usuarios[i]->getter_ci()<<" - "<<a_Usuarios[i]->getter_n()<<a_Usuarios[i]->getter_f().anio<<" - "<<a_Usuarios[i]->getter_f().mes<<" - " <<a_Usuarios[i]->getter_f().dia<<endl;
+            cout<<a_Usuarios[i]->getter_ci()<<" - "<<a_Usuarios[i]->getter_n()<< " - " <<a_Usuarios[i]->getter_f().anio<<" - "<<a_Usuarios[i]->getter_f().mes<<" - " <<a_Usuarios[i]->getter_f().dia<<endl;
             i++;
         }
     }
@@ -195,191 +219,8 @@ void ConfirmacionUsuario(string nombre, string ci){
     cout << "          "<<"Cedula: "<<ci<<endl;
 }
 
+
 //Agregar Vehiculo
-
-int SolicitarNroSerieVehiculo(){
-
-    //------
-
-    bool again=false;
-    bool again2=false;
-    int param_int=0;
-    char param_char;
-
-    //------
-
-    bool match=false;
-    bool stop=false;
-    int i=0;
-    //------
-
-
-
-    system("CLS");
-    cout << "Registrar vehiculo" << endl;
-    do{
-        param_int=0;
-        again=false;
-        again2=false;
-
-        cout << "     "<<"Ingresa NroSerie Vehiculo:" << endl;
-        cout << "     ";
-        cin>> param_int;
-
-        match=false;
-        stop=false;
-        i=0;
-        while(((match==false)&&(stop==false))&&(i<MAX_V))
-        {
-            if(a_Vehiculos[i]==NULL)
-            {
-                stop=true;
-            }
-            else
-            {
-                if(a_Vehiculos[i]->getter_nroS()==param_int)
-                {
-                    match=true;
-                }
-                else
-                {
-                    i++;
-                }
-            }
-        }
-        if(match==false){
-            do{
-                again2=false;
-                cout << "          ";
-                cout << "Confirma el NroSerie Vehiculo (Si=S o No=N): " << param_int << endl;
-                cout << "          ";
-                cin>>param_char;
-
-                if ((param_char=='s')||(param_char=='S')){
-                    again=false;
-                }
-                else{
-                    if ((param_char=='n')||(param_char=='N')){
-                        again=true;
-                    }
-                    else{
-                        cout << "          ";
-                        cout<<"Ingrese una opcion valida."<<endl;
-                        again2=true;
-                    }
-                }
-            }while(again2==true);
-        }
-        else{
-            cout << "          ";
-            cout<<"Ya existe nroSerie."<<endl;
-            again=true;
-        }
-    }while(again==true);
-    return param_int;
-}
-
-float SolicitarPorcentajeVehiculo(){
-    //------
-
-    bool again=false;
-    bool again2=false;
-    float param_float;
-    char param_char;
-    //------
-    cout << "     ";
-    cout << "Ingresa el Porcentaje de Bateria del vehiculo (debe ser positivo y menor o igual a 100):" << endl;
-    do{
-        again=false;
-        cout << "     ";
-        cin >> param_float;
-        do{
-
-            again2=false;
-            cout << "          ";
-            cout << "Confirma el Porcentaje de Bateria (Si=S o No=N): " << param_float << endl;
-            cout << "          ";
-            cin>>param_char;
-
-            if ((param_char=='s')||(param_char=='S')){
-                again=false;
-            }
-            else{
-                if ((param_char=='n')||(param_char=='N')){
-                    again=true;
-                }
-                else{
-                    cout << "          ";
-                    cout<<"Ingrese una opcion valida."<<endl;
-                    again2=true;
-                }
-            }
-        }while(again2==true);
-        if((param_float<101) && (param_float>-1)){
-            return param_float;
-        }
-        else{
-            again=true;
-            cout << "     ";
-            cout << "     ";
-            cout << "El porcentaje de bateria no es aceptable, ingreselo nuevamente" << endl;
-        }
-
-    }while(again==true);
-}
-
-float SolicitarPrecioBaseVehiculo(){
-
-    //------
-
-    bool again=false;
-    bool again2=false;
-    float param_float=0;
-    char param_char;
-
-    //------
-
-
-    do{
-        param_float=0;
-        again=false;
-        again2=false;
-
-        cout << "     "<<"Ingresa Precio Base:" << endl;
-        cout << "     ";
-        cin>> param_float;
-
-        do{
-            again2=false;
-            again=false;
-            cout << "          ";
-            cout << "Confirma el Precio Base (Si=S o No=N): " << param_float << endl;
-            cout << "          ";
-            cin>>param_char;
-
-            if ((param_char=='s')||(param_char=='S')){
-                again=false;
-            }
-            else{
-                if ((param_char=='n')||(param_char=='N')){
-                    again=true;
-                }
-                else{
-                    again2=true;
-                    cout<<"Ingrese una opcion valida."<<endl;
-                }
-            }
-            if (param_float<=0){
-                cout << "          ";
-                cout<<"Ingrese una numero mayor a 0."<<endl;
-                again=true;
-            }
-        }while(again2==true);
-
-    }while(again==true);
-
-    return param_float;
-}
 
 void AgregarVehiculo(int nroSerie,float porcentaje,float precioBase){
     //------
@@ -527,7 +368,8 @@ void AgregarVehiculo(int nroSerie,float porcentaje,float precioBase){
 }
 
 void ConfirmacionMonopatin(int nroSerie, float por, float precioBase, bool luces){
-    cout << "     "<<"Se confirmo la creacion del Monopatin:"<<endl;;
+    cout << "     "<<"Se confirmo la creacion del Monopatin:"<<endl;
+    cout << "          "<<"Nro Serie: "<<nroSerie<<endl;
     cout << "          "<<"Porcentaje Bateria: "<<por<<endl;
     cout << "          "<<"Precio Base: "<<precioBase<<endl;
     if (luces==true){
@@ -540,7 +382,8 @@ void ConfirmacionMonopatin(int nroSerie, float por, float precioBase, bool luces
 }
 
 void ConfirmacionBici(int nroSerie, float por, float precioBase, TipoBici tB, int cantCambios){
-    cout << "     "<<"Se confirmo la creacion del Monopatin:"<<endl;;
+    cout << "     "<<"Se confirmo la creacion del Monopatin:"<<endl;
+        cout << "          "<<"Nro Serie: "<<nroSerie<<endl;
     cout << "          "<<"Porcentaje Bateria: "<<por<<endl;
     cout << "          "<<"Precio Base: "<<precioBase<<endl;
     if (tB==1){
@@ -585,3 +428,117 @@ void printV(){
     }
 }
 
+
+
+int InsertarUsuarioViaje(string c)
+{
+    //variables
+    string r;
+    int a=-1;
+
+    //
+    do
+    {
+        a++;
+        r=a_Usuarios[a]->getter_ci();
+    }while((a<cant_usuarios) && (c!=r));
+    if(a>cant_usuarios)
+    {
+        cout << "La ci que ingreso es incorrecta." << endl;
+        return a;
+    }
+    else
+    {
+        cout << "La ci que ingreso es correcta." << endl;
+        return a;
+    }
+}
+
+int verificarv(int v)
+{
+    //variables
+    int a=-1;
+    int nrov;
+
+    //
+    do
+    {
+        a++;
+        nrov=a_Vehiculos[a]->getter_nroS();
+    }while((a<cant_vehiculos) && (v!=nrov));
+    if(a>cant_vehiculos)
+    {
+        cout << "El nro de serie que ingreso es incorrecta." << endl;
+        return a;
+    }
+    else
+    {
+        cout << "El nro de serie que ingreso es correcta." << endl;
+        return a;
+    }
+}
+
+void IngresarViaje(string c,int nrov,int du,int di,DtFecha fecha)
+{
+    //variables
+    int a,b;
+    DtFecha fusuario;
+
+    //
+    a=InsertarUsuarioViaje(c);
+    if(a>cant_usuarios)
+    {
+
+    }
+    else
+    {
+        fusuario=a_Usuarios[a]->getter_f();
+        b=verificarv(nrov);
+        if(b>cant_vehiculos)
+        {
+
+        }
+        else
+        {
+            if(du<=0)
+            {
+                cout << "La duraci�n debe ser positiva" << endl;
+            }
+            else
+            {
+                if(di<=0)
+                {
+                    cout << "La distancia debe ser positiva." << endl;
+                }
+                else
+                {
+                    if(fecha.anio<fusuario.anio)
+                    {
+                        cout << "La fecha es anterior a la del usuario." << endl;
+                    }
+                    else
+                    {
+                        if(fecha.mes<fusuario.mes && fecha.anio==fusuario.anio)
+                        {
+                            cout << "La fecha es anterior a la del usuario." << endl;
+                        }
+                        else
+                        {
+                            if(fecha.mes==fusuario.mes && fecha.anio==fusuario.anio && fecha.dia<fusuario.dia)
+                            {
+                                cout << "La fecha es anterior a la del usuario." << endl;
+                            }
+                            else
+                            {
+                                Viaje *v=new Viaje(fecha,du,di,a_Vehiculos[b]);
+                                a_Usuarios[a]->setter_v(v);
+                                cout << v->getter_dis();
+                                cout << v->getter_dur();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

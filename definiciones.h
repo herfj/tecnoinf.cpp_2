@@ -27,6 +27,7 @@ typedef enum _TipoBici{
 string SolicitarString(string var);
 int SolicitarInt(string var);
 float SolicitarFloat(string var);
+DtFecha SolicitarFecha(string var);
 
 //Registro Usuarios
 void RegistrarUsuario(string nombre, string ci);
@@ -46,9 +47,9 @@ int insertarusuarioviaje(string c);
 void IngresarViaje(string c,int nrov,int du,int di,DtFecha fecha);
 
 //Insertar Viaje
-int InsertarUsuarioViaje(string c);
-int verificarv(int v);
-void IngresarViaje(string c,int nrov,int du,int di,DtFecha fecha);
+int BuscarUsuario(string ci);
+int BuscarVehiculo(int v);
+void IngresarViaje(string ci,int nroSerie,int dur,int dis,DtFecha fechaViaje);
 void printViaje();
 
 //Cambiar Viaje

@@ -155,6 +155,56 @@ float SolicitarFloat(string var){
     return param;
 }
 
+DtFecha SolicitarFecha(string var){
+   
+    //------
+
+    bool again=false;
+    bool again2=false;
+    DtFecha param;
+    char param_char;
+
+    //------
+
+    do{
+        param;
+        again=false;
+        again2=false;
+
+        cout << "     "<<"Ingresa " << var << " - anio:" << endl;
+        cout << "     ";
+        cin>> param.anio;
+        cout << "     "<<"Ingresa " << var << " - mes:" << endl;
+        cout << "     ";
+        cin>> param.mes;
+        cout << "     "<<"Ingresa " << var << " - dia:" << endl;
+        cout << "     ";
+        cin>> param.dia;
+
+        do{
+            again2=false;
+            cout << "          ";
+            cout << "Confirma el "<< var <<" (Si=S o No=N): " << param << endl;
+            cout << "          ";
+            cin>>param_char;
+
+            if ((param_char=='s')||(param_char=='S')){
+                again=false;
+            }
+            else{
+                if ((param_char=='n')||(param_char=='N')){
+                    again=true;
+                }
+                else{
+                    cout << "          ";
+                    cout<<"Ingrese una letra valida."<<endl;
+                    again2=true;
+                }
+            }
+        }while(again2==true);
+    }while(again==true);
+    return param; 
+}
 
 //Registro Usuario
 
@@ -430,8 +480,7 @@ void printV(){
 
 //Ingresar Viaje
 
-int InsertarUsuarioViaje(string c)
-{
+int BuscarUsuario(string ci){
     //variables
     string r;
     int a=-1;
@@ -446,24 +495,18 @@ int InsertarUsuarioViaje(string c)
         }while((a<cant_usuarios) && (c!=r));
         if(a>cant_usuarios)
         {
-            cout << "La ci que ingreso es incorrecta." << endl;
-            return a;
-        }
-        else
-        {
-            cout << "La ci que ingreso es correcta." << endl;
+            cout << "La CI que ingreso no existe." << endl;
             return a;
         }
     }
     else
     {
-        cout << "no hay usuarios registrados aun" << endl;
+        cout << "No existen Usuarios" << endl;
         return a;
     }
 }
 
-int verificarv(int v)
-{
+int BuscarVehiculo(int v){
     //variables
     int a=-1;
     int nrov;
@@ -479,80 +522,52 @@ int verificarv(int v)
 
         if(a>cant_vehiculos)
         {
-            cout << "El nro de serie que ingreso es incorrecta." << endl;
-            return a;
-        }
-        else
-        {
-            cout << "El nro de serie que ingreso es correcta." << endl;
+            cout << "El nro de Serie que ingreso no existe." << endl;
             return a;
         }
     }
     else
     {
-        cout << "no existen vehiculos ingresados" << endl;
+        cout << "No existen vehiculos." << endl;
 
         return a;
     }
 }
 
-void IngresarViaje(string c,int nrov,int du,int di,DtFecha fecha){
+void IngresarViaje(string ci,int nroSerie,int dur,int dis,DtFecha fechaViaje){
     //variables
     int a,b;
     DtFecha fusuario;
 
     //
-    a=InsertarUsuarioViaje(c);
-    if(a>cant_usuarios || a==-1)
-    {
+    a=BuscarUsuario(ci);
+    if(a>cant_usuarios || a==-1){
 
     }
     else
     {
         fusuario=a_Usuarios[a]->getter_f();
-        b=verificarv(nrov);
-        if(b>cant_vehiculos || b==-1)
-        {
+        b=BuscarVehiculo(nroSerie);
+        if(b>cant_vehiculos || b==-1){
 
         }
-        else
-        {
-            if(du<=0)
-            {
-                cout << "La duracion debe ser positiva" << endl;
+        else{
+            if(fechaViaje.anio<fusuario.anio){
+                cout << "La fecha es anterior a la del usuario." << endl;
             }
-            else
-            {
-                if(di<=0)
-                {
-                    cout << "La distancia debe ser positiva." << endl;
+            else{
+                if(fechaViaje.mes<fusuario.mes && fechaViaje.anio==fusuario.anio){
+                    cout << "La fecha es anterior a la del usuario." << endl;
                 }
-                else
-                {
-                    if(fecha.anio<fusuario.anio)
-                    {
+                else{
+                    if(fechaViaje.mes==fusuario.mes && fechaViaje.anio==fusuario.anio && fechaViaje.dia<fusuario.dia){
                         cout << "La fecha es anterior a la del usuario." << endl;
                     }
-                    else
-                    {
-                        if(fecha.mes<fusuario.mes && fecha.anio==fusuario.anio)
-                        {
-                            cout << "La fecha es anterior a la del usuario." << endl;
-                        }
-                        else
-                        {
-                            if(fecha.mes==fusuario.mes && fecha.anio==fusuario.anio && fecha.dia<fusuario.dia)
-                            {
-                                cout << "La fecha es anterior a la del usuario." << endl;
-                            }
-                            else
-                            {
-                                Viaje *v=new Viaje(fecha,du,di,a_Vehiculos[b]);
-                                a_Usuarios[a]->setter_v(v);
-                            }
-                        }
+                    else{
+                            Viaje *v=new Viaje(fechaViaje,dur,dis,a_Vehiculos[b]);
+                            a_Usuarios[a]->setter_v(v);
                     }
-                }
+                }               
             }
         }
     }
@@ -580,6 +595,7 @@ void cambiarBateriaVehiculo(int nroSerie,float cargaVehiculo){
                 lugar++;
             }
         }while((a_Vehiculos[lugar]->getter_nroS()!=nroSerie)&&(lugar<cant_vehiculos)&&(!existe));
+        
         if(existe){
             a_Vehiculos[lugar]->setter_porB(cargaVehiculo);
         }
@@ -589,37 +605,6 @@ void cambiarBateriaVehiculo(int nroSerie,float cargaVehiculo){
     }
 }
 
-int BuscarUsuario(string c)
-{
-    //variables
-    string r;
-    int a=-1;
-
-    //
-    if(cant_usuarios!=0)
-    {
-        do
-        {
-            a++;
-            r=a_Usuarios[a]->getter_ci();
-        }while((a<cant_usuarios) && (c!=r));
-        if(a>cant_usuarios)
-        {
-            cout << "La ci que ingreso es incorrecta." << endl;
-            return a;
-        }
-        else
-        {
-            cout << "La ci que ingreso es correcta." << endl;
-            return a;
-        }
-    }
-    else
-    {
-        cout << "no hay usuarios registrados aun" << endl;
-        return a;
-    }
-}
 
 /*
 void eliminarViajes(string ci, const DtFecha& fecha)
@@ -629,10 +614,9 @@ void eliminarViajes(string ci, const DtFecha& fecha)
 }
 
 
-Vehiculo** obtenerVehículos(int& cantVehiculos)
-{
-Vehiculo* arregloveoculos[cantVehiculos];
-int i;
+Vehiculo** obtenerVehículos(int& cantVehiculos){
+    Vehiculo* arregloveoculos[cantVehiculos];
+    int i;
     for (i=0;i=cantVehiculos;i++)
         {
             arregloveoculos[i]=

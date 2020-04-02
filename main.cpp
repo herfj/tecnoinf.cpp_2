@@ -28,7 +28,7 @@ int main()
     int param_int3;
     float param_float1;
     float param_float2;
-    DtFecha fecha;
+    DtFecha param_dtfecha;
 
     //------
 
@@ -71,26 +71,36 @@ int main()
                     }
                 }while(param_float2<=0);
 
-
                 AgregarVehiculo(param_int, param_float1, param_float2);
-
                 break;
             case 3:
-                cout << "Ingrese la ci" << endl;
-                    cin >> param_string1;
-                    cout << "Ingrese el nro de serie" << endl;
-                    cin >> param_int;
-                    cout << "Ingrese la duracion del viaje." << endl;
-                    cin >> param_int2;
-                    cout << "Ingrese la distancia del viaje" << endl;
-                    cin >> param_int3;
-                    cout << "Ingrese el anio:";
-                    cin >> fecha.anio;
-                    cout << "Ingrese el mes:";
-                    cin >> fecha.mes;
-                    cout << "Ingrese el dia";
-                    cin >> fecha.dia;
-                    IngresarViaje(param_string1,param_int,param_int2,param_int3,fecha);
+                cout << "Ingresar Viaje" << endl;
+                if(cant_usuarios==0){
+                    cout << "No existen Usuarios" << endl;
+                }
+                else{
+                    if(cant_vehiculos==0){
+                        cout << "No existen Vehiculos" << endl;
+                    }
+                    else{
+                        param_string2=SolicitarString("Cedula");
+                        param_int=SolicitarInt("nro Serie");
+                        do{
+                            param_int2=SolicitarInt("Duracion Viaje");
+                            if(param_int2<=0){
+                                cout << "          La Duracion Viaje debe ser positiva. Intente nuevamente." << endl;
+                            }
+                        }while(param_int2<=0);
+                        do{
+                            param_int3=SolicitarInt("Distancia Viaje");
+                            if(param_int3<=0){
+                                cout << "          La Distancia Viaje debe ser positiva. Intente nuevamente." << endl;
+                            }
+                        }while(param_int3<=0);
+                        param_dtfecha=SolicitarFecha("Fecha del Viaje");
+                        IngresarViaje(param_string1,param_int,param_int2,param_int3,param_dtfecha);
+                    }
+                }
                 break;
             case 4:
                 break;
@@ -98,6 +108,7 @@ int main()
                 printV();
                 break;
             case 6:
+                cout << "Cambio de Porcentaje de Bateria" << endl;
                 param_int=SolicitarInt("nro Serie");
                 do{
                     param_float1=SolicitarFloat("Porcentaje Bateria");

@@ -12,7 +12,7 @@ class Usuario{
         string nombre;
         DtFecha fechaIngreso;
         class Viaje *MisViajes[100];
-        int a=0;
+        int a;
     public:
 
         //Constructor
@@ -28,6 +28,11 @@ class Usuario{
         string getter_ci();
         string getter_n();
         DtFecha getter_f();
+        DtFecha Usuario::getter_fv(int a);
+        int Usuario::getter_du(int a);
+        int Usuario::getter_di(int a);
+        DtFecha Usuario::getter_fv(int a);
+        
 };
 
 #endif // USUARIO_H_INCLUDED

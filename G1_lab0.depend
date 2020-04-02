@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1585774494 source:c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\main.cpp
+1585785620 source:c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\main.cpp
 	<iostream>
 	<string.h>
 	<ctime>
@@ -7,9 +7,9 @@
 	"definiciones.h"
 	"funciones.cpp"
 
-1585773172 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\definiciones.h
+1585785831 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\definiciones.h
 
-1585774616 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\funciones.cpp
+1585785710 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\funciones.cpp
 	<iostream>
 	<unistd.h>
 	<string.h>

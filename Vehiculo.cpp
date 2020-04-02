@@ -35,7 +35,7 @@ float Vehiculo::getter_pB(){
 
 ///MONOPATIN
 
-//Cosntructor
+//Constructor
 
 Monopatin::Monopatin(int nroS, float porB, float pB, bool tL){
             tieneLuces=tL;

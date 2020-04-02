@@ -6,8 +6,6 @@
 
 
 class Vehiculo{
-    private:
-
     protected:
         int nroSerie;
         float porcentajeBateria;

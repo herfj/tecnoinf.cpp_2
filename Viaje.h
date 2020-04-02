@@ -7,8 +7,6 @@
 
 class ViajeBase{
 
-    private:
-
     protected:
         DtFecha fecha;
         int duracion;

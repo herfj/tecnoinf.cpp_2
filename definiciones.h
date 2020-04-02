@@ -24,20 +24,16 @@ typedef enum _TipoBici{
 //DECLARACIONES
 
 //Solicitudes
-
 string SolicitarString(string var);
 int SolicitarInt(string var);
 float SolicitarFloat(string var);
 
 //Registro Usuarios
-
-
 void RegistrarUsuario(string nombre, string ci);
 void ConfirmacionUsuario(string nombre, string ci);
 void printUsuarios();
 
 //AgregarVehiculo
-
 void AgregarVehiculo(int nroSerie,float porcentaje,float precioBase);
 void ConfirmacionMonopatin(int nroSerie, float por, float precioBase, bool luces);
 void ConfirmacionBici(int nroSerie, float por, float precioBase, TipoBici tB, int cantCambios);
@@ -48,6 +44,15 @@ void printV();
 int verificarv(int v);
 int insertarusuarioviaje(string c);
 void IngresarViaje(string c,int nrov,int du,int di,DtFecha fecha);
+
+//Insertar Viaje
+int InsertarUsuarioViaje(string c);
+int verificarv(int v);
+void IngresarViaje(string c,int nrov,int du,int di,DtFecha fecha);
+void printViaje();
+
+//Cambiar Viaje
+void cambiarBateriaVehiculo(int nroSerie,float cargaVehiculo);
 
 
 #endif // DEFINICIONES_H_INCLUDED

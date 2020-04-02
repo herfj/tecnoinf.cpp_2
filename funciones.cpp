@@ -428,7 +428,7 @@ void printV(){
     }
 }
 
-
+//Ingresar Viaje
 
 int InsertarUsuarioViaje(string c)
 {
@@ -437,19 +437,27 @@ int InsertarUsuarioViaje(string c)
     int a=-1;
 
     //
-    do
+    if(cant_usuarios!=0)
     {
-        a++;
-        r=a_Usuarios[a]->getter_ci();
-    }while((a<cant_usuarios) && (c!=r));
-    if(a>cant_usuarios)
-    {
-        cout << "La ci que ingreso es incorrecta." << endl;
-        return a;
+        do
+        {
+            a++;
+            r=a_Usuarios[a]->getter_ci();
+        }while((a<cant_usuarios) && (c!=r));
+        if(a>cant_usuarios)
+        {
+            cout << "La ci que ingreso es incorrecta." << endl;
+            return a;
+        }
+        else
+        {
+            cout << "La ci que ingreso es correcta." << endl;
+            return a;
+        }
     }
     else
     {
-        cout << "La ci que ingreso es correcta." << endl;
+        cout << "no hay usuarios registrados aun" << endl;
         return a;
     }
 }
@@ -461,32 +469,41 @@ int verificarv(int v)
     int nrov;
 
     //
-    do
+    if(cant_vehiculos!=0)
     {
-        a++;
-        nrov=a_Vehiculos[a]->getter_nroS();
-    }while((a<cant_vehiculos) && (v!=nrov));
-    if(a>cant_vehiculos)
-    {
-        cout << "El nro de serie que ingreso es incorrecta." << endl;
-        return a;
+        do
+        {
+            a++;
+            nrov=a_Vehiculos[a]->getter_nroS();
+        }while((a<cant_vehiculos) && (v!=nrov));
+
+        if(a>cant_vehiculos)
+        {
+            cout << "El nro de serie que ingreso es incorrecta." << endl;
+            return a;
+        }
+        else
+        {
+            cout << "El nro de serie que ingreso es correcta." << endl;
+            return a;
+        }
     }
     else
     {
-        cout << "El nro de serie que ingreso es correcta." << endl;
+        cout << "no existen vehiculos ingresados" << endl;
+
         return a;
     }
 }
 
-void IngresarViaje(string c,int nrov,int du,int di,DtFecha fecha)
-{
+void IngresarViaje(string c,int nrov,int du,int di,DtFecha fecha){
     //variables
     int a,b;
     DtFecha fusuario;
 
     //
     a=InsertarUsuarioViaje(c);
-    if(a>cant_usuarios)
+    if(a>cant_usuarios || a==-1)
     {
 
     }
@@ -494,7 +511,7 @@ void IngresarViaje(string c,int nrov,int du,int di,DtFecha fecha)
     {
         fusuario=a_Usuarios[a]->getter_f();
         b=verificarv(nrov);
-        if(b>cant_vehiculos)
+        if(b>cant_vehiculos || b==-1)
         {
 
         }
@@ -502,7 +519,7 @@ void IngresarViaje(string c,int nrov,int du,int di,DtFecha fecha)
         {
             if(du<=0)
             {
-                cout << "La duraci�n debe ser positiva" << endl;
+                cout << "La duracion debe ser positiva" << endl;
             }
             else
             {
@@ -532,8 +549,6 @@ void IngresarViaje(string c,int nrov,int du,int di,DtFecha fecha)
                             {
                                 Viaje *v=new Viaje(fecha,du,di,a_Vehiculos[b]);
                                 a_Usuarios[a]->setter_v(v);
-                                cout << v->getter_dis();
-                                cout << v->getter_dur();
                             }
                         }
                     }
@@ -542,3 +557,87 @@ void IngresarViaje(string c,int nrov,int du,int di,DtFecha fecha)
         }
     }
 }
+
+void printViaje(){
+    cout<< a_Usuarios[0]->getter_du(0)<<endl;
+}
+
+//Cambiar Bateria Vehiculo
+
+void cambiarBateriaVehiculo(int nroSerie,float cargaVehiculo){
+    if(a_Vehiculos[0]==NULL){
+        cout<<"No hay vehiculos registrados. Porfavor registre uno.";
+    }
+    else
+    {
+        int lugar=0;
+        bool existe=true;
+        do{
+            if(a_Vehiculos[lugar]->getter_nroS()==nroSerie){
+                existe=true;
+            }
+            else{
+                lugar++;
+            }
+        }while((a_Vehiculos[lugar]->getter_nroS()!=nroSerie)&&(lugar<cant_vehiculos)&&(!existe));
+        if(existe){
+            a_Vehiculos[lugar]->setter_porB(cargaVehiculo);
+        }
+        else{
+            cout<<"Ese vehiculo no existe."<<endl;
+        }
+    }
+}
+
+int BuscarUsuario(string c)
+{
+    //variables
+    string r;
+    int a=-1;
+
+    //
+    if(cant_usuarios!=0)
+    {
+        do
+        {
+            a++;
+            r=a_Usuarios[a]->getter_ci();
+        }while((a<cant_usuarios) && (c!=r));
+        if(a>cant_usuarios)
+        {
+            cout << "La ci que ingreso es incorrecta." << endl;
+            return a;
+        }
+        else
+        {
+            cout << "La ci que ingreso es correcta." << endl;
+            return a;
+        }
+    }
+    else
+    {
+        cout << "no hay usuarios registrados aun" << endl;
+        return a;
+    }
+}
+
+/*
+void eliminarViajes(string ci, const DtFecha& fecha)
+{
+
+
+}
+
+
+Vehiculo** obtenerVehículos(int& cantVehiculos)
+{
+Vehiculo* arregloveoculos[cantVehiculos];
+int i;
+    for (i=0;i=cantVehiculos;i++)
+        {
+            arregloveoculos[i]=
+        }
+
+
+}
+*/

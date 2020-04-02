@@ -2,6 +2,8 @@
 #include <string.h>
 #include <ctime>
 #include <unistd.h>
+#include <stdexcept>
+#include <bitset>
 
 using namespace std;
 
@@ -91,12 +93,19 @@ int main()
                     IngresarViaje(param_string1,param_int,param_int2,param_int3,fecha);
                 break;
             case 4:
-                    printUsuarios();
                 break;
             case 5:
                 printV();
                 break;
             case 6:
+                param_int=SolicitarInt("nro Serie");
+                do{
+                    param_float1=SolicitarFloat("Porcentaje Bateria");
+                    if((param_float1>100) && (param_float1<0)){
+                        cout << "          El porcentaje de bateria no es aceptable, ingreselo nuevamente" << endl;
+                    }
+                }while((param_float1>100) && (param_float1<0));
+                cambiarBateriaVehiculo(param_int,param_float1);
 
                 break;
             case 7:

@@ -5,6 +5,7 @@
 Usuario::Usuario(string ci, string nom){
     cedula=ci;
     nombre=nom;
+    a=0;
     fechaIngreso=fecha_reg();
 }
 
@@ -25,6 +26,7 @@ void Usuario::setter_f(DtFecha f){
 
 void Usuario::setter_v(class Viaje *v){
     MisViajes[a]=v;
+    a++;
 }
 
 //Getters
@@ -38,4 +40,16 @@ string Usuario::getter_n(){
 
 DtFecha Usuario::getter_f(){
     return fechaIngreso;
+}
+
+int Usuario::getter_du(int a){
+    return MisViajes[a]->getter_dur();
+}
+
+int Usuario::getter_di(int a){
+    return MisViajes[a]->getter_dis();
+}
+
+DtFecha Usuario::getter_fv(int a){
+    return MisViajes[a]->getter_f();
 }

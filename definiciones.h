@@ -23,10 +23,8 @@ typedef enum _TipoBici{
 
 //DECLARACIONES
 
-//Funciones complementarias
+//Vehiculo** obtenerVehiculos(int& cantVehiculos);
 
-void LimpiarPantalla();
-void Espera(int seg);
 
 //Solicitudes
 string SolicitarString(string var);
@@ -34,31 +32,32 @@ int SolicitarInt(string var);
 float SolicitarFloat(string var);
 DtFecha SolicitarFecha(string var);
 
+//Funciones complementarias
+
+DtFecha fecha_reg ();
+void LimpiarPantalla();
+void Espera(int seg);
+
 //Registro Usuarios
 void RegistrarUsuario(string nombre, string ci);
-void ConfirmacionUsuario(string nombre, string ci);
+void ConfirmacionUsuario(int u);
 void printUsuarios();
 
 //AgregarVehiculo
 void AgregarVehiculo(int nroSerie,float porcentaje,float precioBase);
-void ConfirmacionMonopatin(int nroSerie, float por, float precioBase, bool luces);
-void ConfirmacionBici(int nroSerie, float por, float precioBase, TipoBici tB, int cantCambios);
-DtFecha fecha_reg ();
-void printV();
-
-//AgregarViaje
-int verificarv(int v);
-int insertarusuarioviaje(string c);
-void IngresarViaje(string c,int nrov,int du,int di,DtFecha fecha);
+void ConfirmacionVehiculo(int u);
+void printVehiculos();
 
 //Insertar Viaje
 int BuscarUsuario(string ci);
 int BuscarVehiculo(int v);
 void IngresarViaje(string ci,int nroSerie,int dur,int dis,DtFecha fechaViaje);
-void printViaje();
+void ConfirmacionViaje(int ubc_u, int ubc_v);
+void printViajes();
 
 //Cambiar Viaje
 void cambiarBateriaVehiculo(int nroSerie,float cargaVehiculo);
+
 
 
 #endif // DEFINICIONES_H_INCLUDED

@@ -18,16 +18,6 @@ int cant_usuarios=0;
 Vehiculo *a_Vehiculos[MAX_V];
 int cant_vehiculos=0;
 
-//Funciones complementarias
-
-void LimpiarPantalla(){
-    system("CLS");
-}
-
-void Espera(int seg){
-    sleep(seg);
-}
-
 
 //Solicitar
 
@@ -218,6 +208,34 @@ DtFecha SolicitarFecha(string var){
 }
 
 
+
+//Funciones complementarias
+
+DtFecha fecha_reg (){
+    DtFecha fechaing;
+
+    time_t current_time;
+    struct tm * timex;
+    time(&current_time);
+    timex = localtime(&current_time);
+        fechaing.anio= timex->tm_year + 1900;
+        fechaing.mes= timex->tm_mon + 1;
+        fechaing.dia= timex->tm_mday;
+        //el cout q me pidio el cacique hernan
+        //cout << "Hora:Min:Sec: : " << timex->tm_hour <<":"<< timex->tm_min << ":" << timex->tm_sec << endl;
+    return fechaing;
+}
+
+void LimpiarPantalla(){
+    system("CLS");
+}
+
+void Espera(int seg){
+    sleep(seg);
+}
+
+
+
 //Registro Usuario
 
 void RegistrarUsuario(string nombre, string ci){
@@ -245,7 +263,7 @@ void RegistrarUsuario(string nombre, string ci){
         {
             Usuario *u = new Usuario(ci, nombre);
             a_Usuarios[cant_usuarios]=u;
-            ConfirmacionUsuario(nombre,ci);
+            ConfirmacionUsuario(cant_usuarios);
             cant_usuarios++;
         }
         else{
@@ -256,6 +274,12 @@ void RegistrarUsuario(string nombre, string ci){
         cout<<"Esto no es una excepcion pero ya eexiste la ci"<<endl;
     }
 
+}
+
+void ConfirmacionUsuario(int u){
+    cout << "     "<<"Se confirmo la creacion del usuario:"<<endl;
+    cout << "          "<<"Nombre: "<<a_Usuarios[u]->getter_n()<<endl;
+    cout << "          "<<"Cedula: "<<a_Usuarios[u]->getter_ci()<<endl;
 }
 
 void printUsuarios(){
@@ -269,17 +293,12 @@ void printUsuarios(){
             stop=true;
         }
         else{
-            cout<<a_Usuarios[i]->getter_ci()<<" - "<<a_Usuarios[i]->getter_n()<< " - " <<a_Usuarios[i]->getter_f().anio<<" - "<<a_Usuarios[i]->getter_f().mes<<" - " <<a_Usuarios[i]->getter_f().dia<<endl;
+            ConfirmacionUsuario(i);
             i++;
         }
     }
 }
 
-void ConfirmacionUsuario(string nombre, string ci){
-    cout << "     "<<"Se confirmo la creacion del usuario:"<<endl;;
-    cout << "          "<<"Nombre: "<<nombre<<endl;;
-    cout << "          "<<"Cedula: "<<ci<<endl;
-}
 
 
 //Agregar Vehiculo
@@ -356,7 +375,7 @@ void AgregarVehiculo(int nroSerie,float porcentaje,float precioBase){
                     Monopatin *m = new Monopatin(nroSerie,porcentaje,precioBase,luces);
                     Vehiculo *pm=m;
                     a_Vehiculos[cant_vehiculos]=pm;
-                    ConfirmacionMonopatin(nroSerie, porcentaje, precioBase, luces);
+                    ConfirmacionVehiculo(cant_vehiculos);
                     cant_vehiculos++;
                 }
                 else
@@ -408,7 +427,7 @@ void AgregarVehiculo(int nroSerie,float porcentaje,float precioBase){
                         Bicicleta *b = new Bicicleta(nroSerie,porcentaje,precioBase,tipo, cambios);
                         Vehiculo *pb=b;
                         a_Vehiculos[cant_vehiculos]=pb;
-                        ConfirmacionBici(nroSerie, porcentaje, precioBase, tipo, cambios);
+                        ConfirmacionVehiculo(cant_vehiculos);
                         cant_vehiculos++;
                     }
                     else
@@ -431,51 +450,37 @@ void AgregarVehiculo(int nroSerie,float porcentaje,float precioBase){
     }
 }
 
-void ConfirmacionMonopatin(int nroSerie, float por, float precioBase, bool luces){
-    cout << "     "<<"Se confirmo la creacion del Monopatin:"<<endl;
-    cout << "          "<<"Nro Serie: "<<nroSerie<<endl;
-    cout << "          "<<"Porcentaje Bateria: "<<por<<endl;
-    cout << "          "<<"Precio Base: "<<precioBase<<endl;
-    if (luces==true){
-        cout << "          "<<"Tiene Luces: si"<<endl;
+void ConfirmacionVehiculo(int u){
+    if (Monopatin *pM = dynamic_cast<Monopatin *>(a_Vehiculos[u])){
+        cout << "     "<< "Se confirmo la creacion del Monopatin:" << endl;
+        cout << "          "<< "Nro Serie: " << pM->getter_nroS() << endl;
+        cout << "          "<< "Porcentaje Bateria: " << pM->getter_porB() << endl;
+        cout << "          "<< "Precio Base: " << pM->getter_pB() << endl;
+        if (pM->getter_tl()){
+            cout << "          "<< "Tiene Luces: si" << endl;
+        }
+        else{
+            cout << "          "<< "Tiene Luces: no" << endl;
+        }
     }
-    else {
-        cout << "          "<<"Tiene Luces: no"<<endl;
+    else{
+        if (Bicicleta *pB = dynamic_cast<Bicicleta *>(a_Vehiculos[u])){
+            cout << "     "<< "Se confirmo la creacion del Bicicleta:" << endl;
+            cout << "          "<< "Nro Serie: " << pB->getter_nroS() << endl;
+            cout << "          "<< "Porcentaje Bateria: " << pB->getter_porB() << endl;
+            cout << "          "<< "Precio Base: " << pB->getter_pB() << endl;
+            if (pB->getter_tipoB() == 1){
+                cout << "          "<< "Tipo: MONTANIA" << endl;
+            }
+            else{
+                cout << "          "<< "Tipo: PASEO" << endl;
+            }
+            cout << "          "<< "Cantidad de Cambios: " << pB->getter_cantC() << endl;
+        }
     }
-
 }
 
-void ConfirmacionBici(int nroSerie, float por, float precioBase, TipoBici tB, int cantCambios){
-    cout << "     "<<"Se confirmo la creacion del Monopatin:"<<endl;
-        cout << "          "<<"Nro Serie: "<<nroSerie<<endl;
-    cout << "          "<<"Porcentaje Bateria: "<<por<<endl;
-    cout << "          "<<"Precio Base: "<<precioBase<<endl;
-    if (tB==1){
-        cout << "          "<<"Tipo: MONTANIA"<<endl;
-    }
-    else {
-        cout << "          "<<"Tipo: PASEO"<<endl;
-    }
-    cout << "          "<<"Cantidad de Cambios: "<<cantCambios<<endl;
-
-}
-
-DtFecha fecha_reg (){
-    DtFecha fechaing;
-
-    time_t current_time;
-    struct tm * timex;
-    time(&current_time);
-    timex = localtime(&current_time);
-        fechaing.anio= timex->tm_year + 1900;
-        fechaing.mes= timex->tm_mon + 1;
-        fechaing.dia= timex->tm_mday;
-        //el cout q me pidio el cacique hernan
-        //cout << "Hora:Min:Sec: : " << timex->tm_hour <<":"<< timex->tm_min << ":" << timex->tm_sec << endl;
-    return fechaing;
-}
-
-void printV(){
+void printVehiculos(){
 
     bool stop=false;
     int i=0;
@@ -486,11 +491,14 @@ void printV(){
             stop=true;
         }
         else{
-            cout<<a_Vehiculos[i]->getter_nroS()<<" - "<<a_Vehiculos[i]->getter_porB()<< " - "<< a_Vehiculos[i]->getter_pB() <<endl;
+            ConfirmacionVehiculo(i);
             i++;
         }
     }
 }
+
+
+
 
 //Ingresar Viaje
 
@@ -511,6 +519,7 @@ int BuscarUsuario(string ci){
                 ubc=a;
                 stop=true;
             }
+            cout<<r<<"--"<<ci<<endl;
             a++;
         }while((a<cant_usuarios) && (ci!=r)&&(stop==false));
         if (ci == r){
@@ -527,8 +536,9 @@ int BuscarUsuario(string ci){
     }
     else
     {
+        a = -1;
         cout << "No existen Usuarios" << endl;
-        return ubc;
+        return a;
     }
 }
 
@@ -562,13 +572,13 @@ int BuscarVehiculo(int v){
                 cout << "El nro de Serie que ingreso no existe." << endl;
                 return a;
             }
-        }  
+        }
     }
     else
     {
         cout << "No existen vehiculos." << endl;
-
-        return ubc;
+        a = -1;
+        return a;
     }
 }
 
@@ -601,9 +611,10 @@ void IngresarViaje(string ci,int nroSerie,int dur,int dis,DtFecha fechaViaje){
                         cout << "La fecha es anterior a la del usuario." << endl;
                     }
                     else{
-                        cout<<"voy al constructor"<<endl;
                         Viaje *v=new Viaje(fechaViaje,dur,dis,a_Vehiculos[b]);
                         a_Usuarios[a]->setter_v(v);
+                        int nv=a_Usuarios[a]->getter_cantV()-1;
+                        ConfirmacionViaje(a, nv);
                     }
                 }
             }
@@ -611,12 +622,79 @@ void IngresarViaje(string ci,int nroSerie,int dur,int dis,DtFecha fechaViaje){
     }
 }
 
-void printViaje(){
-    cout<< a_Usuarios[0]->getter_du(0)<<endl;
-    cout<< a_Usuarios[0]->getter_fV(0).anio<<endl;
-    cout<< a_Usuarios[0]->getter_fV(0).mes<<endl;
-    cout<< a_Usuarios[0]->getter_fV(0).dia<<endl;
+void ConfirmacionViaje(int ubc_u, int ubc_v){
+    cout << "     "<<"Se confirmo la creacion del Vaiej:"<<endl;
+    cout << "          "<<"Nombre del Usuario: "<<a_Usuarios[ubc_u]->getter_n()<<endl;
+    cout << "          "<<"Cedula del Usuario: "<<a_Usuarios[ubc_u]->getter_ci()<<endl;
+
+    Viaje *pV=a_Usuarios[ubc_u]->getter_viaje(ubc_v);
+
+    Vehiculo *pVe=pV->getter_vehiculo();
+    cout<<""<<endl;
+    if (Monopatin *pM = dynamic_cast<Monopatin *>(pVe)){
+        cout << "          "<< "Nro Serie: " << pM->getter_nroS() << endl;
+        cout << "          "<< "Porcentaje Bateria: " << pM->getter_porB() << endl;
+        cout << "          "<< "Precio Base: " << pM->getter_pB() << endl;
+        if (pM->getter_tl()){
+            cout << "          "<< "Tiene Luces: si" << endl;
+        }
+        else{
+            cout << "          "<< "Tiene Luces: no" << endl;
+        }
+    }
+    else{
+        if (Bicicleta *pB = dynamic_cast<Bicicleta *>(pVe)){
+            cout << "          "<< "Nro Serie: " << pB->getter_nroS() << endl;
+            cout << "          "<< "Porcentaje Bateria: " << pB->getter_porB() << endl;
+            cout << "          "<< "Precio Base: " << pB->getter_pB() << endl;
+            if (pB->getter_tipoB() == 1){
+                cout << "          "<< "Tipo: MONTANIA" << endl;
+            }
+            else{
+                cout << "          "<< "Tipo: PASEO" << endl;
+            }
+            cout << "          "<< "Cantidad de Cambios: " << pB->getter_cantC() << endl;
+        }
+    }
+    cout<<""<<endl;
+    cout << "               "<<"Fecha del Viaje: "<<pV->getter_f().dia<<"/"<<pV->getter_f().mes<<"/"<<pV->getter_f().anio<<endl;
+    cout << "               "<<"Duracion del Viaje: "<< pV->getter_dur()<<endl;
+    cout << "               "<<"Distancia del Viaje: "<< pV->getter_dis()<<endl;
+    cout << "               "<<"Pracio Total del Viaje: "<< pV->getter_tp()<<endl;
 }
+
+void printViajes(){
+    bool stop=false;
+    int i=0;
+    int ii=0;
+
+    while(((stop==false))&&(i<MAX_U))
+    {
+        if(a_Usuarios[i]==NULL){
+            stop=true;
+        }
+        else{
+            while (ii<(a_Usuarios[i]->getter_cantV())){
+                ConfirmacionViaje(i,ii)
+                ii++;
+            }
+            i++;
+        }
+    }
+}
+
+
+
+//
+
+Viaje &operator<(Viaje &v1, Viaje &v2)
+{
+    if ((v1.getter_f().anio < v2.getter_f().anio) || ((v1.getter_f().anio == v2.getter_f().anio) && (v1.getter_f().mes < v2.getter_f().mes)) || ((v1.getter_f().anio == v2.getter_f().anio) && (v1.getter_f().mes == v2.getter_f().mes) && (v1.getter_f().dia < v2.getter_f().dia)))
+    {
+        return v1 < v2;
+    }
+}
+
 
 //Cambiar Bateria Vehiculo
 
@@ -655,14 +733,13 @@ void eliminarViajes(string ci, const DtFecha& fecha)
 }
 
 
-Vehiculo** obtenerVehículos(int& cantVehiculos){
-    Vehiculo* arregloveoculos[cantVehiculos];
+Vehiculo** obtenerVehiculos(int& cantVehiculos){
+    Vehiculo* arreglovehiculos[cantVehiculos];
     int i;
-    for (i=0;i=cantVehiculos;i++)
-        {
-            arregloveoculos[i]=a_Vehiculos[i]
-        }
+    for (i=0;i<=cantVehiculos;i++){
+            arreglovehiculos[i]=a_Vehiculos[i];
+    }
 
-    return
+    return arreglovehiculos;
 }
 */

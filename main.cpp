@@ -30,6 +30,14 @@ int main()
 
     while (exit == false)
     {
+        string param_string1 = "";
+        string param_string2 = "";
+        int param_int=0;
+        int param_int2=0;
+        int param_int3=0;
+        float param_float1=0;
+        float param_float2=0;
+
         cout << "Bienvanido. ELija la opcion." << endl;
         cout << "     "
              << "1) Registrar usuario" << endl;
@@ -116,7 +124,7 @@ int main()
                 }
                 else
                 {
-                    param_string2 = SolicitarString("Cedula");
+                    param_string1 = SolicitarString("Cedula");
                     param_int = SolicitarInt("nro Serie");
                     do
                     {
@@ -140,13 +148,13 @@ int main()
             }
             //------
 
-            Espera(10);
+            Espera(8);
             LimpiarPantalla();
             break;
         case 4:
             LimpiarPantalla();
             //------
-
+            Viaje& operator <(const Viaje &v1,const Viaje &v2);
             //------
             Espera(3);
             LimpiarPantalla();
@@ -154,8 +162,6 @@ int main()
         case 5:
             LimpiarPantalla();
             //------
-
-            printViaje();
 
             //------
             Espera(3);

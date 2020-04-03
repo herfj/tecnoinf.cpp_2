@@ -57,12 +57,15 @@ class Bicicleta : public Vehiculo{
         //Cosntructor
         Bicicleta (int nroS, float porB, float pB, TipoBici tpB, int cambios);
 
+        //Funciones
         float DarPrecioViaje(int dis);
 
         //Seetters
         void setter(TipoBici tpB);
+        
         //Getters
         TipoBici getter_tipoB();
+        int getter_cantC();
 };
 
 

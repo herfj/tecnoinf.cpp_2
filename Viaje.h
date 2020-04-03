@@ -38,7 +38,12 @@ class Viaje : public ViajeBase{
         void setter_p(class Vehiculo *v);
 
         //Getters
-        float getter_p();
+        float getter_tp();
+        Vehiculo* getter_vehiculo();
+
+        //Funciones
+
+        friend Viaje &operator<(const Viaje &v1, const Viaje &v2);
 };
 
 

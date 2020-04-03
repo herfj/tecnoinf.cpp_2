@@ -43,10 +43,12 @@ Viaje::Viaje(DtFecha f,int dur, int dis, Vehiculo *v){
     vehiculo=v;
 
     if(Monopatin *pM = dynamic_cast<Monopatin *> (v)){
-        totalPrecio = v->DarPrecioViaje(distancia, duracion);
+        totalPrecio = pM->DarPrecioViaje(distancia, duracion);
     }
     else{
-        totalPrecio = v->DarPrecioViaje(distancia);
+        if(Bicicleta *pB = dynamic_cast<Bicicleta *> (v)){
+            totalPrecio = pB->DarPrecioViaje(distancia);
+        }
     }
 }
 
@@ -57,7 +59,11 @@ void Viaje::setter_p(class Vehiculo *v){
 }
 
 //Getters
-float Viaje::getter_p(){
+Vehiculo* Viaje::getter_vehiculo(){
+    return vehiculo;
+}
+
+float Viaje::getter_tp(){
     return totalPrecio;
 }
 

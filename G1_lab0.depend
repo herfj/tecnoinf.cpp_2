@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1585870917 source:c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\main.cpp
+1585944476 source:c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\main.cpp
 	<iostream>
 	<string.h>
 	<ctime>
@@ -9,9 +9,9 @@
 	"definiciones.h"
 	"funciones.cpp"
 
-1585864835 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\definiciones.h
+1585944720 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\definiciones.h
 
-1585873591 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\funciones.cpp
+1585945790 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\funciones.cpp
 	<iostream>
 	<unistd.h>
 	<string.h>
@@ -20,23 +20,23 @@
 	"Viaje.cpp"
 	"Vehiculo.cpp"
 
-1585865607 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\usuario.cpp
+1585944666 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\usuario.cpp
 	"Usuario.h"
 
-1585865607 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\usuario.h
+1585944675 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\usuario.h
 	"definiciones.h"
 	"Viaje.h"
 
-1585869685 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\viaje.h
+1585944924 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\viaje.h
 	"definiciones.h"
 	"Vehiculo.h"
 
-1585870135 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\viaje.cpp
+1585945342 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\viaje.cpp
 	"Viaje.h"
 
-1585868150 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\vehiculo.h
+1585942020 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\vehiculo.h
 	"definiciones.h"
 
-1585867594 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\vehiculo.cpp
+1585942119 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\vehiculo.cpp
 	"Vehiculo.h"
 

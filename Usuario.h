@@ -30,7 +30,8 @@ class Usuario{
         DtFecha getter_f();
         int getter_du(int a);
         int getter_di(int a);
-        DtFecha getter_fV(int a);
+        int getter_cantV();
+        Viaje* getter_viaje(int a);
 };
 
 #endif // USUARIO_H_INCLUDED

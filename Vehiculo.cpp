@@ -38,11 +38,11 @@ float Vehiculo::getter_pB(){
 //Constructor
 
 Monopatin::Monopatin(int nroS, float porB, float pB, bool tL){
-            tieneLuces=tL;
-            nroSerie=nroS;
-            porcentajeBateria=porB;
-            precioBase=pB;
-        }
+    tieneLuces=tL;
+    nroSerie=nroS;
+    porcentajeBateria=porB;
+    precioBase=pB;
+}
 
 float Monopatin::DarPrecioViaje(int dis, int dur){
     float totalPrecio;
@@ -95,3 +95,6 @@ TipoBici Bicicleta::getter_tipoB(){
     return tipobici;
 }
 
+int Bicicleta::getter_cantC(){
+    return cantcambios;
+}

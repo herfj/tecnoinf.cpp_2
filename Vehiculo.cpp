@@ -44,7 +44,7 @@ Monopatin::Monopatin(int nroS, float porB, float pB, bool tL){
             precioBase=pB;
         }
 
-float Monopatin::DarPrecioViaje(int dur,int dis){
+float Monopatin::DarPrecioViaje(int dis, int dur){
     float totalPrecio;
     if(tieneLuces)
     {

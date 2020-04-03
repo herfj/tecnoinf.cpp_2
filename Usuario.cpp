@@ -50,6 +50,6 @@ int Usuario::getter_di(int a){
     return MisViajes[a]->getter_dis();
 }
 
-DtFecha Usuario::getter_fv(int a){
+DtFecha Usuario::getter_fV(int a){
     return MisViajes[a]->getter_f();
 }

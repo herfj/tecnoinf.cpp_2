@@ -1,15 +1,17 @@
 # depslib dependency file v1.0
-1585785620 source:c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\main.cpp
+1585870917 source:c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\main.cpp
 	<iostream>
 	<string.h>
 	<ctime>
 	<unistd.h>
+	<stdexcept>
+	<bitset>
 	"definiciones.h"
 	"funciones.cpp"
 
-1585785831 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\definiciones.h
+1585864835 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\definiciones.h
 
-1585785710 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\funciones.cpp
+1585871840 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\funciones.cpp
 	<iostream>
 	<unistd.h>
 	<string.h>
@@ -18,23 +20,23 @@
 	"Viaje.cpp"
 	"Vehiculo.cpp"
 
-1585774207 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\usuario.cpp
+1585865607 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\usuario.cpp
 	"Usuario.h"
 
-1585774259 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\usuario.h
+1585865607 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\usuario.h
 	"definiciones.h"
 	"Viaje.h"
 
-1585774283 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\viaje.h
+1585869685 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\viaje.h
 	"definiciones.h"
 	"Vehiculo.h"
 
-1585774283 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\viaje.cpp
+1585870135 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\viaje.cpp
 	"Viaje.h"
 
-1585774583 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\vehiculo.h
+1585868150 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\vehiculo.h
 	"definiciones.h"
 
-1585774316 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\vehiculo.cpp
+1585867594 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\vehiculo.cpp
 	"Vehiculo.h"
 

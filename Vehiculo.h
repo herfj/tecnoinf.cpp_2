@@ -10,9 +10,8 @@ class Vehiculo{
         int nroSerie;
         float porcentajeBateria;
         float precioBase;
-        virtual float DarPrecioViaje(int dur,int dis){};
     public:
-
+        virtual float DarPrecioViaje(int dur, int dis){};
         //Constructores
 
         //Setters
@@ -38,7 +37,7 @@ class Monopatin : public Vehiculo{
 
         Monopatin(int nroS, float porB, float pB, bool tL);
 
-        float DarPrecioViaje(int dur,int dis);
+        float DarPrecioViaje(int dis, int dur);
 
         //Setters
         void setter_tl(bool tL);

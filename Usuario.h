@@ -28,11 +28,9 @@ class Usuario{
         string getter_ci();
         string getter_n();
         DtFecha getter_f();
-        DtFecha Usuario::getter_fv(int a);
-        int Usuario::getter_du(int a);
-        int Usuario::getter_di(int a);
-        DtFecha Usuario::getter_fv(int a);
-        
+        int getter_du(int a);
+        int getter_di(int a);
+        DtFecha getter_fV(int a);
 };
 
 #endif // USUARIO_H_INCLUDED

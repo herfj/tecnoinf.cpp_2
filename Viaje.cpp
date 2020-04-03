@@ -40,7 +40,17 @@ Viaje::Viaje(DtFecha f,int dur, int dis, Vehiculo *v){
     fecha.mes=f.mes;
     duracion=dur;
     distancia=dis;
-    vehiculo=(v);
+    vehiculo=v;
+    cout<<"estoy por consultar el dinamic"<<endl;
+    if(Monopatin *pM = dynamic_cast<Monopatin *> (v)){
+        cout<<"Es monopatin"<<endl;
+        totalPrecio = v->DarPrecioViaje(distancia, duracion);
+    }
+    else{
+        cout<<"No es monopatin"<<endl;
+    }
+
+    cout<<totalPrecio<<endl;
 }
 
 //Setters

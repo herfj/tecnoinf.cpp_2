@@ -18,6 +18,17 @@ int cant_usuarios=0;
 Vehiculo *a_Vehiculos[MAX_V];
 int cant_vehiculos=0;
 
+//Funciones complementarias
+
+void LimpiarPantalla(){
+    system("CLS");
+}
+
+void Espera(int seg){
+    sleep(seg);
+}
+
+
 //Solicitar
 
 string SolicitarString(string var){
@@ -156,7 +167,7 @@ float SolicitarFloat(string var){
 }
 
 DtFecha SolicitarFecha(string var){
-   
+
     //------
 
     bool again=false;
@@ -184,7 +195,7 @@ DtFecha SolicitarFecha(string var){
         do{
             again2=false;
             cout << "          ";
-            cout << "Confirma el "<< var <<" (Si=S o No=N): " << param << endl;
+            cout<< "Confirma el " << var << " (Si=S o No=N): " << param.dia << "/" <<param.mes << "/" <<param.anio << endl;
             cout << "          ";
             cin>>param_char;
 
@@ -203,8 +214,9 @@ DtFecha SolicitarFecha(string var){
             }
         }while(again2==true);
     }while(again==true);
-    return param; 
+    return param;
 }
+
 
 //Registro Usuario
 
@@ -342,7 +354,8 @@ void AgregarVehiculo(int nroSerie,float porcentaje,float precioBase){
                 if(cant_vehiculos<MAX_V)
                 {
                     Monopatin *m = new Monopatin(nroSerie,porcentaje,precioBase,luces);
-                    a_Vehiculos[cant_vehiculos]=m;
+                    Vehiculo *pm=m;
+                    a_Vehiculos[cant_vehiculos]=pm;
                     ConfirmacionMonopatin(nroSerie, porcentaje, precioBase, luces);
                     cant_vehiculos++;
                 }
@@ -393,7 +406,8 @@ void AgregarVehiculo(int nroSerie,float porcentaje,float precioBase){
                     if(cant_vehiculos<MAX_V)
                     {
                         Bicicleta *b = new Bicicleta(nroSerie,porcentaje,precioBase,tipo, cambios);
-                        a_Vehiculos[cant_vehiculos]=b;
+                        Vehiculo *pb=b;
+                        a_Vehiculos[cant_vehiculos]=pb;
                         ConfirmacionBici(nroSerie, porcentaje, precioBase, tipo, cambios);
                         cant_vehiculos++;
                     }
@@ -483,18 +497,19 @@ void printV(){
 int BuscarUsuario(string ci){
     //variables
     string r;
-    int a=-1;
+    int a=0;
 
     //
     if(cant_usuarios!=0)
     {
         do
         {
-            a++;
             r=a_Usuarios[a]->getter_ci();
-        }while((a<cant_usuarios) && (c!=r));
-        if(a>cant_usuarios)
+            a++;
+        }while((a<cant_usuarios) && (ci!=r));
+        if((a>=cant_usuarios) && (ci!=r))
         {
+            a=-1;
             cout << "La CI que ingreso no existe." << endl;
             return a;
         }
@@ -508,7 +523,7 @@ int BuscarUsuario(string ci){
 
 int BuscarVehiculo(int v){
     //variables
-    int a=-1;
+    int a=0;
     int nrov;
 
     //
@@ -516,12 +531,14 @@ int BuscarVehiculo(int v){
     {
         do
         {
-            a++;
             nrov=a_Vehiculos[a]->getter_nroS();
+            cout<<nrov<<" - la que tu ingresaste:"<<v<<endl;
+            a++;
         }while((a<cant_vehiculos) && (v!=nrov));
 
-        if(a>cant_vehiculos)
+        if((a>=cant_vehiculos) &&(v!=nrov))
         {
+            a=-1;
             cout << "El nro de Serie que ingreso no existe." << endl;
             return a;
         }
@@ -540,16 +557,18 @@ void IngresarViaje(string ci,int nroSerie,int dur,int dis,DtFecha fechaViaje){
     DtFecha fusuario;
 
     //
+    cout<<"0"<<endl;
     a=BuscarUsuario(ci);
+    cout<<"1:"<<a<<endl;
     if(a>cant_usuarios || a==-1){
-
     }
     else
     {
+        cout<<"2"<<endl;
         fusuario=a_Usuarios[a]->getter_f();
         b=BuscarVehiculo(nroSerie);
+        cout<<"3:"<<b<<endl;
         if(b>cant_vehiculos || b==-1){
-
         }
         else{
             if(fechaViaje.anio<fusuario.anio){
@@ -564,10 +583,11 @@ void IngresarViaje(string ci,int nroSerie,int dur,int dis,DtFecha fechaViaje){
                         cout << "La fecha es anterior a la del usuario." << endl;
                     }
                     else{
-                            Viaje *v=new Viaje(fechaViaje,dur,dis,a_Vehiculos[b]);
-                            a_Usuarios[a]->setter_v(v);
+                        cout<<"voy al constructor"<<endl;
+                        Viaje *v=new Viaje(fechaViaje,dur,dis,a_Vehiculos[b]);
+                        a_Usuarios[a]->setter_v(v);
                     }
-                }               
+                }
             }
         }
     }
@@ -575,6 +595,9 @@ void IngresarViaje(string ci,int nroSerie,int dur,int dis,DtFecha fechaViaje){
 
 void printViaje(){
     cout<< a_Usuarios[0]->getter_du(0)<<endl;
+    cout<< a_Usuarios[0]->getter_fV(0).anio<<endl;
+    cout<< a_Usuarios[0]->getter_fV(0).mes<<endl;
+    cout<< a_Usuarios[0]->getter_fV(0).dia<<endl;
 }
 
 //Cambiar Bateria Vehiculo
@@ -595,7 +618,7 @@ void cambiarBateriaVehiculo(int nroSerie,float cargaVehiculo){
                 lugar++;
             }
         }while((a_Vehiculos[lugar]->getter_nroS()!=nroSerie)&&(lugar<cant_vehiculos)&&(!existe));
-        
+
         if(existe){
             a_Vehiculos[lugar]->setter_porB(cargaVehiculo);
         }

@@ -23,6 +23,11 @@ typedef enum _TipoBici{
 
 //DECLARACIONES
 
+//Funciones complementarias
+
+void LimpiarPantalla();
+void Espera(int seg);
+
 //Solicitudes
 string SolicitarString(string var);
 int SolicitarInt(string var);

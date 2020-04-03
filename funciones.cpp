@@ -498,6 +498,8 @@ int BuscarUsuario(string ci){
     //variables
     string r;
     int a=0;
+    int ubc=0;
+    bool stop=false;
 
     //
     if(cant_usuarios!=0)
@@ -505,26 +507,37 @@ int BuscarUsuario(string ci){
         do
         {
             r=a_Usuarios[a]->getter_ci();
+            if(ci==r){
+                ubc=a;
+                stop=true;
+            }
             a++;
-        }while((a<cant_usuarios) && (ci!=r));
-        if((a>=cant_usuarios) && (ci!=r))
-        {
-            a=-1;
-            cout << "La CI que ingreso no existe." << endl;
-            return a;
+        }while((a<cant_usuarios) && (ci!=r)&&(stop==false));
+        if (ci == r){
+            return ubc;
+        }
+        else{
+            if ((a >= cant_usuarios) && (ci != r))
+            {
+                a = -1;
+                cout << "La CI que ingreso no existe." << endl;
+                return a;
+            }
         }
     }
     else
     {
         cout << "No existen Usuarios" << endl;
-        return a;
+        return ubc;
     }
 }
 
 int BuscarVehiculo(int v){
     //variables
     int a=0;
+    int ubc=0;
     int nrov;
+    bool stop=false;
 
     //
     if(cant_vehiculos!=0)
@@ -532,22 +545,30 @@ int BuscarVehiculo(int v){
         do
         {
             nrov=a_Vehiculos[a]->getter_nroS();
-            cout<<nrov<<" - la que tu ingresaste:"<<v<<endl;
+            if(nrov==v){
+                ubc=a;
+                stop=true;
+            }
             a++;
         }while((a<cant_vehiculos) && (v!=nrov));
-
-        if((a>=cant_vehiculos) &&(v!=nrov))
+        if (nrov == v)
         {
-            a=-1;
-            cout << "El nro de Serie que ingreso no existe." << endl;
-            return a;
+            return ubc;
         }
+        else{
+            if ((a >= cant_vehiculos) && (v != nrov))
+            {
+                a = -1;
+                cout << "El nro de Serie que ingreso no existe." << endl;
+                return a;
+            }
+        }  
     }
     else
     {
         cout << "No existen vehiculos." << endl;
 
-        return a;
+        return ubc;
     }
 }
 
@@ -557,17 +578,14 @@ void IngresarViaje(string ci,int nroSerie,int dur,int dis,DtFecha fechaViaje){
     DtFecha fusuario;
 
     //
-    cout<<"0"<<endl;
+
     a=BuscarUsuario(ci);
-    cout<<"1:"<<a<<endl;
     if(a>cant_usuarios || a==-1){
     }
     else
     {
-        cout<<"2"<<endl;
         fusuario=a_Usuarios[a]->getter_f();
         b=BuscarVehiculo(nroSerie);
-        cout<<"3:"<<b<<endl;
         if(b>cant_vehiculos || b==-1){
         }
         else{
@@ -642,9 +660,9 @@ Vehiculo** obtenerVehículos(int& cantVehiculos){
     int i;
     for (i=0;i=cantVehiculos;i++)
         {
-            arregloveoculos[i]=
+            arregloveoculos[i]=a_Vehiculos[i]
         }
 
-
+    return
 }
 */

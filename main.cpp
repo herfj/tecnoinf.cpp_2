@@ -140,7 +140,7 @@ int main()
             }
             //------
 
-            Espera(3);
+            Espera(10);
             LimpiarPantalla();
             break;
         case 4:

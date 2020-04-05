@@ -278,16 +278,14 @@ void RegistrarUsuario(string nombre, string ci)
         }
         else
         {
-            try
-            {
-                throw invalid_argument("la sedula ya existe cara de pija");
-            }
-        catch (const std::invalid_argument& ia) {
-        std::cerr << "Invalid argument: " << ia.what() << '\n';
-//            catch(exception& e)
-//            {
-//                cout << e.what() << endl;
-            }
+        try
+        {
+            throw invalid_argument("La cedula ingresada ya existe");
+        }
+        catch (const std::invalid_argument& ia)
+        {
+            std::cerr << "Invalid argument: " << ia.what() << '\n';
+        }
         }
     }
 
@@ -330,6 +328,7 @@ void AgregarVehiculo(int nroSerie,float porcentaje,float precioBase){
     TipoBici tipo;
     int cambios;
     bool again=false;
+    bool por=false;
 
     //------
 
@@ -351,6 +350,16 @@ void AgregarVehiculo(int nroSerie,float porcentaje,float precioBase){
             }
         }
     }
+    if ((porcentaje>=0)&&(porcentaje<=100)){
+        por=true;
+    }
+    try{
+        if(!por){
+            throw invalid_argument("El porcentaje debe estar entre 0 y 100");
+        }
+        if(precioBase<=0){
+            throw invalid_argument("El precio base debe ser positivo");
+        }
     if(match==false){
         cout << "     ";
         cout << "Desea registrar: Monopatin (M) o Bicicleta (B)" << endl;
@@ -461,8 +470,14 @@ void AgregarVehiculo(int nroSerie,float porcentaje,float precioBase){
     }
     else{
         cout << "          ";
-        cout<<"Ya existe un Vehiculo con ese nroSerie"<<endl;
+        throw invalid_argument("Ya existe un Vehiculo con ese nroSerie");
     }
+    }
+    catch (const std::invalid_argument& ia)
+        {
+            std::cerr << "Invalid argument: " << ia.what() << '\n';
+        }
+
 }
 
 void ConfirmacionVehiculo(int u){
@@ -614,26 +629,35 @@ void IngresarViaje(string ci,int nroSerie,int dur,int dis,DtFecha fechaViaje){
         if(b>cant_vehiculos || b==-1){
         }
         else{
-            if(fechaViaje.anio<fusuario.anio){
-                cout << "La fecha es anterior a la del usuario." << endl;
-            }
-            else{
-                if(fechaViaje.mes<fusuario.mes && fechaViaje.anio==fusuario.anio){
-                    cout << "La fecha es anterior a la del usuario." << endl;
+            try{
+                if(fechaViaje.anio<fusuario.anio)
+                {
+                    throw invalid_argument("La fecha es anterior a la del usuario.");
                 }
                 else{
-                    if(fechaViaje.mes==fusuario.mes && fechaViaje.anio==fusuario.anio && fechaViaje.dia<fusuario.dia){
-                        cout << "La fecha es anterior a la del usuario." << endl;
+                    if(fechaViaje.mes<fusuario.mes && fechaViaje.anio==fusuario.anio)
+                    {
+                        throw invalid_argument("La fecha es anterior a la del usuario.");
                     }
                     else{
-                        Viaje *v=new Viaje(fechaViaje,dur,dis,a_Vehiculos[b]);
-                        a_Usuarios[a]->setter_v(v);
-                        int nv=a_Usuarios[a]->getter_cantV()-1;
-                        ConfirmacionViaje(a, nv);
+                        if(fechaViaje.mes==fusuario.mes && fechaViaje.anio==fusuario.anio && fechaViaje.dia<fusuario.dia)
+                        {
+                            throw invalid_argument("La fecha es anterior a la del usuario.");
+                        }
+                        else{
+                            Viaje *v=new Viaje(fechaViaje,dur,dis,a_Vehiculos[b]);
+                            a_Usuarios[a]->setter_v(v);
+                            int nv=a_Usuarios[a]->getter_cantV()-1;
+                            ConfirmacionViaje(a, nv);
+                        }
                     }
                 }
             }
-        }
+
+            catch (const std::invalid_argument& ia)
+            {
+                std::cerr << "Invalid argument: " << ia.what() << '\n';
+            }}
     }
 }
 

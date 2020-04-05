@@ -83,7 +83,7 @@
 1585932152 c:\users\administrador\downloads\g1_lab0-master\vehiculo.cpp
 	"Vehiculo.h"
 
-1586047020 source:c:\users\usuario\desktop\g1_lab0-master\main.cpp
+1586113850 source:c:\users\usuario\desktop\g1_lab0-master\main.cpp
 	<iostream>
 	<string.h>
 	<ctime>
@@ -93,9 +93,9 @@
 	"definiciones.h"
 	"funciones.cpp"
 
-1586066706 c:\users\usuario\desktop\g1_lab0-master\definiciones.h
+1586056434 c:\users\usuario\desktop\g1_lab0-master\definiciones.h
 
-1586067726 c:\users\usuario\desktop\g1_lab0-master\funciones.cpp
+1586114263 c:\users\usuario\desktop\g1_lab0-master\funciones.cpp
 	<iostream>
 	<unistd.h>
 	<string.h>
@@ -104,25 +104,25 @@
 	"Viaje.cpp"
 	"Vehiculo.cpp"
 
-1586042899 c:\users\usuario\desktop\g1_lab0-master\usuario.cpp
+1586056434 c:\users\usuario\desktop\g1_lab0-master\usuario.cpp
 	"Usuario.h"
 
-1585932152 c:\users\usuario\desktop\g1_lab0-master\usuario.h
+1586056434 c:\users\usuario\desktop\g1_lab0-master\usuario.h
 	"definiciones.h"
 	"Viaje.h"
 
-1585932152 c:\users\usuario\desktop\g1_lab0-master\viaje.h
+1586056434 c:\users\usuario\desktop\g1_lab0-master\viaje.h
 	"definiciones.h"
 	"Vehiculo.h"
 
-1585932152 c:\users\usuario\desktop\g1_lab0-master\vehiculo.h
+1586056434 c:\users\usuario\desktop\g1_lab0-master\vehiculo.h
 	"definiciones.h"
 
-1585932152 c:\users\usuario\desktop\g1_lab0-master\viaje.cpp
+1586056434 c:\users\usuario\desktop\g1_lab0-master\viaje.cpp
 	"Viaje.h"
 
-1585932152 c:\users\usuario\desktop\g1_lab0-master\vehiculo.cpp
+1586056434 c:\users\usuario\desktop\g1_lab0-master\vehiculo.cpp
 	"Vehiculo.h"
 
-1586044536 source:c:\users\usuario\desktop\g1_lab0-master\src\ss.cpp
+1586056434 source:c:\users\usuario\desktop\g1_lab0-master\src\ss.cpp
 

@@ -85,24 +85,24 @@ int main()
 
                 cout << "Registrar Vehiculo" << endl;
                 param_int = SolicitarInt("nro Serie");
-                do
-                {
+//                do
+//                {
                     param_float1 = SolicitarFloat("Porcentaje Bateria");
-                    if ((param_float1 > 100) && (param_float1 < 0))
-                    {
-                        cout << "          El porcentaje de bateria no es aceptable, ingreselo nuevamente" << endl;
-                    }
-                }
-                while ((param_float1 > 100) && (param_float1 < 0));
-                do
-                {
+//                    if ((param_float1 > 100) && (param_float1 < 0))
+//                    {
+//                        cout << "          El porcentaje de bateria no es aceptable, ingreselo nuevamente" << endl;
+//                    }
+//                }
+//                while ((param_float1 > 100) && (param_float1 < 0));
+//                do
+//                {
                     param_float2 = SolicitarFloat("Precio Base");
-                    if (param_float2 <= 0)
-                    {
-                        cout << "          El Precio Base debe ser positivo, ingreselo nuevamente" << endl;
-                    }
-                }
-                while (param_float2 <= 0);
+//                    if (param_float2 <= 0)
+//                    {
+//                        cout << "          El Precio Base debe ser positivo, ingreselo nuevamente" << endl;
+//                    }
+//                }
+//                while (param_float2 <= 0);
 
                 AgregarVehiculo(param_int, param_float1, param_float2);
 
@@ -126,29 +126,53 @@ int main()
                         cout << "     No existen Vehiculos" << endl;
                     }
                     else
-                    {
-                        param_string1 = SolicitarString("Cedula");
-                        param_int = SolicitarInt("nro Serie");
-                        do
-                        {
+                    { int i;
+                        bool n=false;
+                        bool nserie=false;
+                          try{
+                            param_string1 = SolicitarString("Cedula");
+                            for(i=0;((i<=cant_usuarios)||(n=true));i++){
+                                if(param_string1==a_Usuarios[i]->getter_ci()){
+                                    n=true;
+                                }
+                            }
+                            if(!n){
+                                throw invalid_argument("La cedula ingresada no existe");
+                            }
+                            param_int = SolicitarInt("nro Serie");
+                            for(i=0;((i<=cant_vehiculos)||(nserie=true));i++){
+                                if(param_int==a_Vehiculos[i]->nroSerie){
+                                    nserie=true;
+                                }
+                            }
+                            if(!nserie){
+                                throw invalid_argument("No existe un vehiculo con ese Nº de serie.");
+                            }
+
+
                             param_int2 = SolicitarInt("Duracion Viaje");
                             if (param_int2 <= 0)
                             {
-                                cout << "          La Duracion Viaje debe ser positiva. Intente nuevamente." << endl;
+                                throw invalid_argument("          La Duracion Viaje debe ser positiva.");
                             }
-                        }
-                        while (param_int2 <= 0);
-                        do
-                        {
+
+
+
+
                             param_int3 = SolicitarInt("Distancia Viaje");
                             if (param_int3 <= 0)
                             {
-                                cout << "          La Distancia Viaje debe ser positiva. Intente nuevamente." << endl;
+                                throw invalid_argument("          La Distancia Viaje debe ser positiva.");
                             }
-                        }
-                        while (param_int3 <= 0);
+
+
                         param_dtfecha = SolicitarFecha("Fecha del Viaje");
                         IngresarViaje(param_string1, param_int, param_int2, param_int3, param_dtfecha);
+                    }
+                                catch (const std::invalid_argument& ia)
+            {
+                std::cerr << "Invalid argument: " << ia.what() << '\n';
+            }
                     }
                 }
                 //------

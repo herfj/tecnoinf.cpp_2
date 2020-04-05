@@ -11,6 +11,7 @@ Usuario::Usuario(string ci, string nom){
 
 //Setters
 void Usuario::setter_ci(string ci){
+
     cedula=ci;
 }
 

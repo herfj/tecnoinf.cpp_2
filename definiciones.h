@@ -14,6 +14,11 @@ typedef struct{
     int anio;
 }DtFecha;
 
+typedef struct{
+class Viaje *v[100];
+int cont=0;
+}vaf;
+
 //Enums
 
 typedef enum _TipoBici{
@@ -22,6 +27,14 @@ typedef enum _TipoBici{
 
 
 //DECLARACIONES
+class nelson : public exception
+{
+public:
+    const char* what() const throw()
+    {
+        return "Error: Ya existe la CI ingresada";
+    }
+};
 
 //Vehiculo** obtenerVehiculos(int& cantVehiculos);
 
@@ -57,6 +70,9 @@ void printViajes();
 
 //Cambiar Viaje
 void cambiarBateriaVehiculo(int nroSerie,float cargaVehiculo);
+
+//AntesF
+vaf verviajesantesdefecha(const DtFecha f,string ci);
 
 
 

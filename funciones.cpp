@@ -227,54 +227,69 @@ DtFecha fecha_reg (){
 }
 
 void LimpiarPantalla(){
-    system("CLS");
+    //system("CLS");
 }
 
 void Espera(int seg){
-    sleep(seg);
+    //sleep(seg);
 }
 
 
 
 //Registro Usuario
 
-void RegistrarUsuario(string nombre, string ci){
+void RegistrarUsuario(string nombre, string ci)
+{
+        bool match=false;
+        bool stop=false;
+        int i=0;
 
-    bool match=false;
-    bool stop=false;
-    int i=0;
-
-    while(((match==false)&&(stop==false))&&(i<MAX_U))
-    {
-        if(a_Usuarios[i]==NULL){
-            stop=true;
-        }
-        else{
-            if(a_Usuarios[i]->getter_ci()==ci){
-                match=true;
-            }
-            else{
-                i++;
-            }
-        }
-    }
-    if(match==false){
-        if(cant_usuarios<MAX_U)
+        while(((match==false)&&(stop==false))&&(i<MAX_U))
         {
-            Usuario *u = new Usuario(ci, nombre);
-            a_Usuarios[cant_usuarios]=u;
-            ConfirmacionUsuario(cant_usuarios);
-            cant_usuarios++;
+            if(a_Usuarios[i]==NULL)
+            {
+                stop=true;
+            }
+            else
+            {
+                if(a_Usuarios[i]->getter_ci()==ci)
+                {
+                    match=true;
+                }
+                else
+                {
+                    i++;
+                }
+            }
         }
-        else{
-            cout<<"Se supera el Array"<<endl;
+        if(match==false)
+        {
+            if(cant_usuarios<MAX_U)
+            {
+                Usuario *u = new Usuario(ci, nombre);
+                a_Usuarios[cant_usuarios]=u;
+                ConfirmacionUsuario(cant_usuarios);
+                cant_usuarios++;
+            }
+            else
+            {
+                cout<<"Se supera el Array"<<endl;
+            }
+        }
+        else
+        {
+            try
+            {
+                throw invalid_argument("la sedula ya existe cara de pija");
+            }
+        catch (const std::invalid_argument& ia) {
+        std::cerr << "Invalid argument: " << ia.what() << '\n';
+//            catch(exception& e)
+//            {
+//                cout << e.what() << endl;
+            }
         }
     }
-    else{
-        cout<<"Esto no es una excepcion pero ya eexiste la ci"<<endl;
-    }
-
-}
 
 void ConfirmacionUsuario(int u){
     cout << "     "<<"Se confirmo la creacion del usuario:"<<endl;
@@ -623,7 +638,7 @@ void IngresarViaje(string ci,int nroSerie,int dur,int dis,DtFecha fechaViaje){
 }
 
 void ConfirmacionViaje(int ubc_u, int ubc_v){
-    cout << "     "<<"Se confirmo la creacion del Vaiej:"<<endl;
+    cout << "     "<<"Se confirmo la creacion del Vaije:"<<endl;
     cout << "          "<<"Nombre del Usuario: "<<a_Usuarios[ubc_u]->getter_n()<<endl;
     cout << "          "<<"Cedula del Usuario: "<<a_Usuarios[ubc_u]->getter_ci()<<endl;
 
@@ -675,7 +690,7 @@ void printViajes(){
         }
         else{
             while (ii<(a_Usuarios[i]->getter_cantV())){
-                ConfirmacionViaje(i,ii)
+                ConfirmacionViaje(i,ii);
                 ii++;
             }
             i++;
@@ -687,12 +702,39 @@ void printViajes(){
 
 //
 
-Viaje &operator<(Viaje &v1, Viaje &v2)
+bool operator<(DtFecha f1, DtFecha f2)
 {
-    if ((v1.getter_f().anio < v2.getter_f().anio) || ((v1.getter_f().anio == v2.getter_f().anio) && (v1.getter_f().mes < v2.getter_f().mes)) || ((v1.getter_f().anio == v2.getter_f().anio) && (v1.getter_f().mes == v2.getter_f().mes) && (v1.getter_f().dia < v2.getter_f().dia)))
+    bool j;
+    if ((f1.anio < f2.anio) || ((f1.anio == f2.anio) && (f1.mes < f2.mes)) || ((f1.anio == f2.anio) && (f1.mes == f2.mes) && (f1.dia < f2.dia)))
     {
-        return v1 < v2;
+        j=true;
+        return j;
     }
+    j=false;
+    return j;
+}
+
+vaf verviajesantesdefecha(const DtFecha f,string ci)
+{
+    //variables
+    int a,b,c;
+    DtFecha fu;
+    vaf v;
+    bool z;
+
+    //
+    b=BuscarUsuario(ci);
+    c=a_Usuarios[b]->getter_cantV();
+    for(a=0;a<c;a++)
+    {
+        fu=a_Usuarios[b]->getter_viaje(a)->getter_f();
+        if(fu<f)
+        {
+            v.v[v.cont]=a_Usuarios[b]->getter_viaje(a);
+            v.cont++;
+        }
+    }
+    return v;
 }
 
 
@@ -743,3 +785,26 @@ Vehiculo** obtenerVehiculos(int& cantVehiculos){
     return arreglovehiculos;
 }
 */
+
+ostream &operator <<(ostream &o,class Vehiculo *v)
+{
+    string a="no";
+    string b="Montania";
+    if(Monopatin *vM = dynamic_cast<Monopatin *> (v))
+    {
+        if(vM->getter_tl())
+        {
+            a="si";
+        }
+        o << "Numero de serie:" << vM->getter_nroS() << endl << "Porcentaje bateria:" << vM->getter_porB() << endl << "Precio base:" << vM->getter_pB() << endl << "Tiene luces:" << a << endl;
+    }
+        if(Bicicleta *vB = dynamic_cast<Bicicleta *> (v))
+    {
+        if(vB->getter_tipoB()==0)
+        {
+            b="Paseo";
+        }
+        o << "Numero de serie:" << vB->getter_nroS() << endl << "Porcentaje bateria:" << vB->getter_porB() << endl << "Precio base:" << vB->getter_pB() << endl << "Tipo de bici:" << b << endl << "Cantidad de cambios:" << vB->getter_cantC() << endl;
+    }
+    return o;
+}

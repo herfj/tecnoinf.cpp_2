@@ -238,14 +238,13 @@ void Espera(int seg){
 
 //Registro Usuario
 
-void RegistrarUsuario(string nombre, string ci)
-{
-        bool match=false;
-        bool stop=false;
-        int i=0;
+void RegistrarUsuario(string nombre, string ci){
+    bool match=false;
+    bool stop=false;
+    int i=0;
 
-        while(((match==false)&&(stop==false))&&(i<MAX_U))
-        {
+    while(((match==false)&&(stop==false))&&(i<MAX_U))
+    {
             if(a_Usuarios[i]==NULL)
             {
                 stop=true;
@@ -261,8 +260,8 @@ void RegistrarUsuario(string nombre, string ci)
                     i++;
                 }
             }
-        }
-        if(match==false)
+    }
+    if(match==false)
         {
             if(cant_usuarios<MAX_U)
             {
@@ -278,16 +277,16 @@ void RegistrarUsuario(string nombre, string ci)
         }
         else
         {
-        try
-        {
-            throw invalid_argument("La cedula ingresada ya existe");
+            try
+            {
+                throw invalid_argument("La cedula ingresada ya existe");
+            }
+            catch (const std::invalid_argument& ia)
+            {
+                std::cerr << "Invalid argument: " << ia.what() << '\n';
+            }
         }
-        catch (const std::invalid_argument& ia)
-        {
-            std::cerr << "Invalid argument: " << ia.what() << '\n';
-        }
-        }
-    }
+}
 
 void ConfirmacionUsuario(int u){
     cout << "     "<<"Se confirmo la creacion del usuario:"<<endl;
@@ -357,6 +356,9 @@ void AgregarVehiculo(int nroSerie,float porcentaje,float precioBase){
         if(!por){
             throw invalid_argument("El porcentaje debe estar entre 0 y 100");
         }
+        if(match){
+            throw invalid_argument("El nroSerie ingresado ya existe.");
+        }
         if(precioBase<=0){
             throw invalid_argument("El precio base debe ser positivo");
         }
@@ -399,7 +401,7 @@ void AgregarVehiculo(int nroSerie,float porcentaje,float precioBase){
                     Monopatin *m = new Monopatin(nroSerie,porcentaje,precioBase,luces);
                     Vehiculo *pm=m;
                     a_Vehiculos[cant_vehiculos]=pm;
-                    ConfirmacionVehiculo(cant_vehiculos);
+                    ConfirmacionVehiculo(cant_vehiculos, true);
                     cant_vehiculos++;
                 }
                 else
@@ -451,7 +453,7 @@ void AgregarVehiculo(int nroSerie,float porcentaje,float precioBase){
                         Bicicleta *b = new Bicicleta(nroSerie,porcentaje,precioBase,tipo, cambios);
                         Vehiculo *pb=b;
                         a_Vehiculos[cant_vehiculos]=pb;
-                        ConfirmacionVehiculo(cant_vehiculos);
+                        ConfirmacionVehiculo(cant_vehiculos, true);
                         cant_vehiculos++;
                     }
                     else
@@ -480,12 +482,21 @@ void AgregarVehiculo(int nroSerie,float porcentaje,float precioBase){
 
 }
 
-void ConfirmacionVehiculo(int u){
+void ConfirmacionVehiculo(int u, bool creacion){
     if (Monopatin *pM = dynamic_cast<Monopatin *>(a_Vehiculos[u])){
-        cout << "     "<< "Se confirmo la creacion del Monopatin:" << endl;
-        cout << "          "<< "Nro Serie: " << pM->getter_nroS() << endl;
+        if (creacion==true){
+            cout << "     "<< "Se confirmo la creacion del Monopatin:" << endl;
+            cout << "     ";
+        }
+        else{
+            cout<<""<<endl;
+        }
+        cout << "     "<< "Nro Serie: " << pM->getter_nroS() << endl;
         cout << "          "<< "Porcentaje Bateria: " << pM->getter_porB() << endl;
         cout << "          "<< "Precio Base: " << pM->getter_pB() << endl;
+        if(creacion!=true){
+            cout<<"     Tipo de vehiculo: Monopatin"<<endl;
+        }
         if (pM->getter_tl()){
             cout << "          "<< "Tiene Luces: si" << endl;
         }
@@ -495,10 +506,23 @@ void ConfirmacionVehiculo(int u){
     }
     else{
         if (Bicicleta *pB = dynamic_cast<Bicicleta *>(a_Vehiculos[u])){
-            cout << "     "<< "Se confirmo la creacion del Bicicleta:" << endl;
-            cout << "          "<< "Nro Serie: " << pB->getter_nroS() << endl;
+            if (creacion == true)
+            {
+                cout << "     "<< "Se confirmo la creacion del Bicicleta:" << endl;
+                cout << "     ";
+            }
+            else
+            {
+                cout << "" << endl;
+            }
+
+            cout << "     "<< "Nro Serie: " << pB->getter_nroS() << endl;
             cout << "          "<< "Porcentaje Bateria: " << pB->getter_porB() << endl;
             cout << "          "<< "Precio Base: " << pB->getter_pB() << endl;
+            if (creacion != true)
+            {
+                cout << "     Tipo de vehiculo: Bicicleta" << endl;
+            }
             if (pB->getter_tipoB() == 1){
                 cout << "          "<< "Tipo: MONTANIA" << endl;
             }
@@ -521,12 +545,12 @@ void printVehiculos(){
             stop=true;
         }
         else{
-            ConfirmacionVehiculo(i);
+            ConfirmacionVehiculo(i, false);
             i++;
+            cout<<""<<endl;
         }
     }
 }
-
 
 
 
@@ -549,7 +573,6 @@ int BuscarUsuario(string ci){
                 ubc=a;
                 stop=true;
             }
-            cout<<r<<"--"<<ci<<endl;
             a++;
         }while((a<cant_usuarios) && (ci!=r)&&(stop==false));
         if (ci == r){
@@ -559,7 +582,7 @@ int BuscarUsuario(string ci){
             if ((a >= cant_usuarios) && (ci != r))
             {
                 a = -1;
-                cout << "La CI que ingreso no existe." << endl;
+                //cout << "La CI que ingreso no existe." << endl;
                 return a;
             }
         }
@@ -599,7 +622,7 @@ int BuscarVehiculo(int v){
             if ((a >= cant_vehiculos) && (v != nrov))
             {
                 a = -1;
-                cout << "El nro de Serie que ingreso no existe." << endl;
+                //cout << "El nro de Serie que ingreso no existe." << endl;
                 return a;
             }
         }
@@ -621,6 +644,7 @@ void IngresarViaje(string ci,int nroSerie,int dur,int dis,DtFecha fechaViaje){
 
     a=BuscarUsuario(ci);
     if(a>cant_usuarios || a==-1){
+
     }
     else
     {
@@ -738,8 +762,7 @@ bool operator<(DtFecha f1, DtFecha f2)
     return j;
 }
 
-vaf verviajesantesdefecha(const DtFecha f,string ci)
-{
+vaf verviajesantesdefecha(const DtFecha f,string ci){
     //variables
     int a,b,c;
     DtFecha fu;
@@ -760,6 +783,7 @@ vaf verviajesantesdefecha(const DtFecha f,string ci)
     }
     return v;
 }
+
 
 
 //Cambiar Bateria Vehiculo
@@ -791,27 +815,7 @@ void cambiarBateriaVehiculo(int nroSerie,float cargaVehiculo){
 }
 
 
-/*
-void eliminarViajes(string ci, const DtFecha& fecha)
-{
-
-
-}
-
-
-Vehiculo** obtenerVehiculos(int& cantVehiculos){
-    Vehiculo* arreglovehiculos[cantVehiculos];
-    int i;
-    for (i=0;i<=cantVehiculos;i++){
-            arreglovehiculos[i]=a_Vehiculos[i];
-    }
-
-    return arreglovehiculos;
-}
-*/
-
-ostream &operator <<(ostream &o,class Vehiculo *v)
-{
+ostream &operator <<(ostream &o,class Vehiculo *v){
     string a="no";
     string b="Montania";
     if(Monopatin *vM = dynamic_cast<Monopatin *> (v))
@@ -832,3 +836,6 @@ ostream &operator <<(ostream &o,class Vehiculo *v)
     }
     return o;
 }
+
+
+

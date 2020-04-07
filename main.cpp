@@ -59,8 +59,7 @@ int main()
         cout << "Opcion:" << endl;
         cin >> op;
 
-            switch (op)
-            {
+        switch (op){
             case 0:
                 LimpiarPantalla();
                 cout << "Gracias!" << endl;
@@ -79,30 +78,31 @@ int main()
                 Espera(2);
                 LimpiarPantalla();
                 break;
+
             case 2:
                 LimpiarPantalla();
                 //------
 
                 cout << "Registrar Vehiculo" << endl;
                 param_int = SolicitarInt("nro Serie");
-//                do
-//                {
+                //do
+                //{
                     param_float1 = SolicitarFloat("Porcentaje Bateria");
-//                    if ((param_float1 > 100) && (param_float1 < 0))
-//                    {
-//                        cout << "          El porcentaje de bateria no es aceptable, ingreselo nuevamente" << endl;
-//                    }
-//                }
-//                while ((param_float1 > 100) && (param_float1 < 0));
-//                do
-//                {
+                //if ((param_float1 > 100) && (param_float1 < 0))
+                //{
+                //    cout << "          El porcentaje de bateria no es aceptable, ingreselo nuevamente" << endl;
+                //}
+                //}
+                //while ((param_float1 > 100) && (param_float1 < 0));
+                //do
+                //{
                     param_float2 = SolicitarFloat("Precio Base");
-//                    if (param_float2 <= 0)
-//                    {
-//                        cout << "          El Precio Base debe ser positivo, ingreselo nuevamente" << endl;
-//                    }
-//                }
-//                while (param_float2 <= 0);
+                //if (param_float2 <= 0)
+                //{
+                //cout << "          El Precio Base debe ser positivo, ingreselo nuevamente" << endl;
+                //}
+                //}
+                //while (param_float2 <= 0);
 
                 AgregarVehiculo(param_int, param_float1, param_float2);
 
@@ -114,67 +114,69 @@ int main()
                 LimpiarPantalla();
                 //------
 
-                cout << "Ingresar Viaje" << endl;
-                if (cant_usuarios == 0)
+            cout << "Ingresar Viaje" << endl;
+            if (cant_usuarios == 0)
+            {
+                cout << "     No existen Usuarios" << endl;
+            }
+            else
+            {
+                if (cant_vehiculos == 0)
                 {
-                    cout << "     No existen Usuarios" << endl;
+                    cout << "     No existen Vehiculos" << endl;
                 }
                 else
                 {
-                    if (cant_vehiculos == 0)
+                    int i;
+                    int ubc;
+                    bool ci=false;
+                    bool nserie=false;
+                    try
                     {
-                        cout << "     No existen Vehiculos" << endl;
-                    }
-                    else
-                    { int i;
-                        bool n=false;
-                        bool nserie=false;
-                          try{
-                            param_string1 = SolicitarString("Cedula");
-                            for(i=0;((i<=cant_usuarios)||(n=true));i++){
-                                if(param_string1==a_Usuarios[i]->getter_ci()){
-                                    n=true;
-                                }
-                            }
-                            if(!n){
-                                throw invalid_argument("La cedula ingresada no existe");
-                            }
-                            param_int = SolicitarInt("nro Serie");
-                            for(i=0;((i<=cant_vehiculos)||(nserie=true));i++){
-                                if(param_int==a_Vehiculos[i]->nroSerie){
-                                    nserie=true;
-                                }
-                            }
-                            if(!nserie){
-                                throw invalid_argument("No existe un vehiculo con ese Nº de serie.");
-                            }
+                        param_string1 = SolicitarString("Cedula");
+                        ubc=BuscarUsuario(param_string1);
+                        if(ubc!=-1)
+                        {
+                            ci=true;
+                        }
+                        if(ci==false)
+                        {
+                            throw invalid_argument("La cedula ingresada no existe");
+                        }
+                        param_int = SolicitarInt("nro Serie");
+                        ubc=BuscarVehiculo(param_int);
+                        if(ubc!=-1)
+                        {
+                                nserie=true;
+                        }
 
+                        if(nserie==false)
+                        {
+                            throw invalid_argument("No existe un vehiculo con ese Nro de serie.");
+                        }
 
-                            param_int2 = SolicitarInt("Duracion Viaje");
-                            if (param_int2 <= 0)
-                            {
-                                throw invalid_argument("          La Duracion Viaje debe ser positiva.");
-                            }
+                        param_int2 = SolicitarInt("Duracion Viaje");
+                        if (param_int2 <= 0)
+                        {
+                            throw invalid_argument("          La Duracion Viaje debe ser positiva.");
+                        }
 
-
-
-
-                            param_int3 = SolicitarInt("Distancia Viaje");
-                            if (param_int3 <= 0)
-                            {
-                                throw invalid_argument("          La Distancia Viaje debe ser positiva.");
-                            }
-
+                        param_int3 = SolicitarInt("Distancia Viaje");
+                        if (param_int3 <= 0)
+                        {
+                            throw invalid_argument("          La Distancia Viaje debe ser positiva.");
+                        }
 
                         param_dtfecha = SolicitarFecha("Fecha del Viaje");
                         IngresarViaje(param_string1, param_int, param_int2, param_int3, param_dtfecha);
                     }
-                                catch (const std::invalid_argument& ia)
-            {
-                std::cerr << "Invalid argument: " << ia.what() << '\n';
-            }
+                    catch (const std::invalid_argument& ia)
+                    {
+                        std::cerr << "Invalid argument: " << ia.what() << '\n';
                     }
                 }
+            }
+
                 //------
 
                 Espera(8);
@@ -183,10 +185,18 @@ int main()
             case 4:
                 LimpiarPantalla();
                 //------
-                param_string1=SolicitarString("la cedula");
-                param_dtfecha=SolicitarFecha("Fecha antes de viaje");
-                av=verviajesantesdefecha(param_dtfecha,param_string1);
-                cout << "la cantidad de viajes encontrados fueron: " << av.cont << endl;
+
+                cout <<"Viajes Antes de Fecha"<<endl;
+                if (cant_usuarios == 0)
+                {
+                    cout << "     No existen Usuarios" << endl;
+                }
+                else{
+                    param_string1=SolicitarString("Cedula");
+                    param_dtfecha=SolicitarFecha("Fecha antes de viaje");
+                    av=verviajesantesdefecha(param_dtfecha,param_string1);
+                    cout << "la cantidad de viajes encontrados fueron: " << av.cont << endl;
+                }
                 //------
                 Espera(3);
                 LimpiarPantalla();
@@ -223,8 +233,13 @@ int main()
             case 7:
                 LimpiarPantalla();
                 //------
+                if(a_Vehiculos[0]==NULL){
+                    cout << "     No existen Vehiculos" << endl;
+                }
+                else{
+                    printVehiculos();
+                }
 
-                cout << a_Vehiculos[0];
                 //------
                 Espera(3);
                 LimpiarPantalla();

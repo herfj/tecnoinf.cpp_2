@@ -58,7 +58,7 @@ void printUsuarios();
 
 //AgregarVehiculo
 void AgregarVehiculo(int nroSerie,float porcentaje,float precioBase);
-void ConfirmacionVehiculo(int u);
+void ConfirmacionVehiculo(int u, bool creacion);
 void printVehiculos();
 
 //Insertar Viaje

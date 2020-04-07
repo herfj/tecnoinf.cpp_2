@@ -746,10 +746,6 @@ void printViajes(){
     }
 }
 
-
-
-//
-
 bool operator<(DtFecha f1, DtFecha f2)
 {
     bool j;

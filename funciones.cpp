@@ -733,6 +733,7 @@ void printViajes(){
 
     while(((stop==false))&&(i<MAX_U))
     {
+        ii=0;
         if(a_Usuarios[i]==NULL){
             stop=true;
         }
@@ -833,5 +834,105 @@ ostream &operator <<(ostream &o,class Vehiculo *v){
     return o;
 }
 
+//eliminar viaje
 
+void eliminarViajes(string ci, const DtFecha& fecha)
+{
+    int a;
+    int b=0;
+    int c=0;
+    int cont=0;
+    int i=0;
+    Viaje *aux;
+    Viaje *aux2;
+
+    Usuario *aux_U[MAX_U];
+    for(i=0;i<MAX_U;i++)
+    {
+        aux_U[i]=a_Usuarios[i];
+    }
+
+    DtFecha fusuario;
+    DtFecha fecha_vu;
+
+    DtFecha fecha_velim=fecha;
+
+    a=BuscarUsuario(ci);
+    if(a>cant_usuarios || a==-1)
+    {
+
+    }
+    else
+    {
+
+        fusuario=a_Usuarios[a]->getter_f();
+        int cv=a_Usuarios[a]->getter_cantV()-1;
+        try
+        {
+            if(fecha_velim.anio<fusuario.anio)
+            {
+                throw invalid_argument("La fecha es anterior a la del usuario.");
+            }
+            else
+            {
+                if(fecha_velim.mes<fusuario.mes && fecha_velim.anio==fusuario.anio)
+                {
+                    throw invalid_argument("La fecha es anterior a la del usuario.");
+                }
+                else
+                {
+                    if(fecha_velim.mes==fusuario.mes && fecha_velim.anio==fusuario.anio && fecha_velim.dia<fusuario.dia)
+                    {
+                        throw invalid_argument("La fecha es anterior a la del usuario.");
+                    }
+                    else
+                    {
+                        do
+                        {
+                            aux = a_Usuarios[a]->getter_viaje(b);
+                            fecha_vu=aux->getter_f();
+                            if(fecha_velim.anio==fecha_vu.anio && fecha_velim.mes==fecha_vu.mes && fecha_velim.dia==fecha_vu.dia)
+                            {
+                                c = b;
+                                ConfirmacionViaje(a, c);
+                                
+                                if(c+1==cv){
+                                    //apunta a null
+                                }
+                                else{
+                                    while (c < cv)
+                                    {
+                                        if(c+1==cv){
+                                            aux2 = a_Usuarios[a]->getter_viaje(c);
+                                            a_Usuarios[a]->setter_v_ubc(aux2, c-1);
+                                        }
+                                        else{
+                                            aux2 = a_Usuarios[a]->getter_viaje(c + 1);
+                                            a_Usuarios[a]->setter_v_ubc(aux2, c);
+                                        }
+                                        
+                                        c++;
+                                        
+                                    }
+                                }
+                                cont++;
+                                //delete aux;
+                            }
+                            b++;
+
+                        }
+                        while(b<=cv);
+                        cout << "Cantidad de viajes eliminados: " << cont << endl;
+                        a_Usuarios[a]->setter_cv(cv-cont);
+                    }
+                }
+            }
+        }
+
+        catch (const std::invalid_argument& ia)
+        {
+            std::cerr << "Invalid argument: " << ia.what() << '\n';
+        }
+    }
+}
 

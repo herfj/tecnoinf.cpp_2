@@ -186,14 +186,46 @@ int main()
             Espera(3);
             LimpiarPantalla();
             break;
-        case 5:
-            LimpiarPantalla();
-            //------
+         case 5:
+                LimpiarPantalla();
+                //------
 
-            //------
-            Espera(3);
-            LimpiarPantalla();
-            break;
+                cout << "Eliminar Viajes" << endl;
+                if (cant_usuarios == 0)
+                {
+                    cout << "     No existen Usuarios" << endl;
+                }
+                else
+                {
+                    int ubc;
+                    bool ci=false;
+                    try
+                    {
+                        param_string1=SolicitarString("Cedula");
+                        ubc=BuscarUsuario(param_string1);
+                        if(ubc!=-1)
+                        {
+                            ci=true;
+                        }
+                        if(ci==false)
+                        {
+                            throw invalid_argument("La cedula ingresada no existe");
+                        }
+
+                        param_dtfecha = SolicitarFecha("Fecha del Viaje");
+                        eliminarViajes(param_string1, param_dtfecha);
+
+                    }
+                    catch (const std::invalid_argument& ia)
+                    {
+                        std::cerr << "Invalid argument: " << ia.what() << '\n';
+                    }
+                }
+
+                //------
+                Espera(3);
+                LimpiarPantalla();
+                break;
         case 6:
             LimpiarPantalla();
             //------
@@ -243,8 +275,8 @@ int main()
             }
             else
             {
-                cout<<"La cantidad de Vehiculo: "<< cant_vehiculos<<endl();
-                
+//                cout<<"La cantidad de Vehiculo: "<< cant_vehiculos<<endl();
+
                 for(param_int=0;param_int<cant_vehiculos;param_int++)
                 {
                     cout<<""<<endl;
@@ -256,6 +288,9 @@ int main()
             //------
             Espera(3);
             LimpiarPantalla();
+            break;
+        case 8:
+            printViajes();
             break;
         default:
             LimpiarPantalla();

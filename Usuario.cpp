@@ -30,6 +30,15 @@ void Usuario::setter_v(class Viaje *v){
     a++;
 }
 
+void Usuario::setter_v_ubc(class Viaje *v, int ubc){
+    MisViajes[ubc] = v;
+}
+
+void Usuario::setter_cv(int cv)
+{
+    a=cv;
+}
+
 //Getters
 string Usuario::getter_ci(){
     return cedula;
@@ -43,18 +52,18 @@ DtFecha Usuario::getter_f(){
     return fechaIngreso;
 }
 
-int Usuario::getter_du(int a){
-    return MisViajes[a]->getter_dur();
+int Usuario::getter_du(int u){
+    return MisViajes[u]->getter_dur();
 }
 
-int Usuario::getter_di(int a){
-    return MisViajes[a]->getter_dis();
+int Usuario::getter_di(int u){
+    return MisViajes[u]->getter_dis();
 }
 
 int Usuario::getter_cantV(){
     return a;
 }
 
-Viaje* Usuario::getter_viaje(int a){
-    return MisViajes[a];
+Viaje* Usuario::getter_viaje(int u){
+    return MisViajes[u];
 }

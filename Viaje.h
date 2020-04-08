@@ -34,6 +34,9 @@ class Viaje : public ViajeBase{
         //Constructor
         Viaje(DtFecha f,int dur, int dis, Vehiculo *v);
 
+        //Destructor
+        ~Viaje();
+
         //Setters
         void setter_p(class Vehiculo *v);
 

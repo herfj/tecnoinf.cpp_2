@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1586279527 source:c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\main.cpp
+1586312434 source:c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\main.cpp
 	<iostream>
 	<string.h>
 	<ctime>
@@ -9,9 +9,9 @@
 	"definiciones.h"
 	"funciones.cpp"
 
-1586217859 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\definiciones.h
+1586289143 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\definiciones.h
 
-1586280097 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\funciones.cpp
+1586313111 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\funciones.cpp
 	<iostream>
 	<unistd.h>
 	<string.h>
@@ -20,24 +20,24 @@
 	"Viaje.cpp"
 	"Vehiculo.cpp"
 
-1586118870 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\usuario.cpp
+1586311419 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\usuario.cpp
 	"Usuario.h"
 
-1586118870 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\usuario.h
+1586311421 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\usuario.h
 	"definiciones.h"
 	"Viaje.h"
 
-1586118870 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\viaje.h
+1586310298 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\viaje.h
 	"definiciones.h"
 	"Vehiculo.h"
 
-1586118870 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\viaje.cpp
+1586309462 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\viaje.cpp
 	"Viaje.h"
 
-1586118870 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\vehiculo.h
+1586288154 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\vehiculo.h
 	"definiciones.h"
 
-1586118870 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\vehiculo.cpp
+1586288154 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\vehiculo.cpp
 	"Vehiculo.h"
 
 1586044536 source:c:\users\administrador\downloads\g1_lab0-master\src\ss.cpp
@@ -126,5 +126,48 @@
 
 1586056434 source:c:\users\usuario\desktop\g1_lab0-master\src\ss.cpp
 
-1586118870 source:c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\src\ss.cpp
+1586288154 source:c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\src\ss.cpp
+
+1586288154 source:c:\users\usuario\downloads\g1_lab0-master\src\ss.cpp
+
+1586291263 source:c:\users\usuario\downloads\g1_lab0-master\main.cpp
+	<iostream>
+	<string.h>
+	<ctime>
+	<unistd.h>
+	<stdexcept>
+	<bitset>
+	"definiciones.h"
+	"funciones.cpp"
+
+1586289143 c:\users\usuario\downloads\g1_lab0-master\definiciones.h
+
+1586305894 c:\users\usuario\downloads\g1_lab0-master\funciones.cpp
+	<iostream>
+	<unistd.h>
+	<string.h>
+	"definiciones.h"
+	"Usuario.cpp"
+	"Viaje.cpp"
+	"Vehiculo.cpp"
+
+1586296859 c:\users\usuario\downloads\g1_lab0-master\usuario.cpp
+	"Usuario.h"
+
+1586296859 c:\users\usuario\downloads\g1_lab0-master\usuario.h
+	"definiciones.h"
+	"Viaje.h"
+
+1586305894 c:\users\usuario\downloads\g1_lab0-master\viaje.h
+	"definiciones.h"
+	"Vehiculo.h"
+
+1586288154 c:\users\usuario\downloads\g1_lab0-master\vehiculo.h
+	"definiciones.h"
+
+1586305523 c:\users\usuario\downloads\g1_lab0-master\viaje.cpp
+	"Viaje.h"
+
+1586288154 c:\users\usuario\downloads\g1_lab0-master\vehiculo.cpp
+	"Vehiculo.h"
 

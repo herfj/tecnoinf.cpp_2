@@ -35,12 +35,14 @@ int ViajeBase::getter_dis(){
 
 //Constructor
 Viaje::Viaje(DtFecha f,int dur, int dis, Vehiculo *v){
+
     fecha.anio=f.anio;
     fecha.dia=f.dia;
     fecha.mes=f.mes;
     duracion=dur;
     distancia=dis;
     vehiculo=v;
+
 
     if(Monopatin *pM = dynamic_cast<Monopatin *> (v)){
         totalPrecio = pM->DarPrecioViaje(distancia, duracion);
@@ -50,6 +52,12 @@ Viaje::Viaje(DtFecha f,int dur, int dis, Vehiculo *v){
             totalPrecio = pB->DarPrecioViaje(distancia);
         }
     }
+
+}
+
+//Destructor
+Viaje::~Viaje(){
+    delete[] vehiculo;
 }
 
 //Setters

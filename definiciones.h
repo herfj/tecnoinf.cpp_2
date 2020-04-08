@@ -74,6 +74,7 @@ void cambiarBateriaVehiculo(int nroSerie,float cargaVehiculo);
 //AntesF
 vaf verviajesantesdefecha(const DtFecha f,string ci);
 
-
+//Eliminar viaje
+void eliminarViajes(string ci, const DtFecha& fecha);
 
 #endif // DEFINICIONES_H_INCLUDED

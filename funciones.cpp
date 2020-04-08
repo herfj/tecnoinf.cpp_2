@@ -836,21 +836,146 @@ ostream &operator <<(ostream &o,class Vehiculo *v){
 
 //eliminar viaje
 
-void eliminarViajes(string ci, const DtFecha& fecha)
+bool fechas(DtFecha f1, DtFecha f2){
+    if (f1.anio == f2.anio && f1.mes == f2.mes && f1.dia == f2.dia)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+    void eliminarViajes(string ci, const DtFecha &fecha)
 {
-    int a;
-    int b=0;
-    int c=0;
+    int ubc_u;
+    int ubc_v=0;
+    int ubc_v2= 0;
     int cont=0;
     int i=0;
     Viaje *aux;
     Viaje *aux2;
 
-    Usuario *aux_U[MAX_U];
-    for(i=0;i<MAX_U;i++)
+    DtFecha fusuario;
+    DtFecha fecha_vu;
+
+    DtFecha fecha_velim=fecha;
+
+    ubc_u = BuscarUsuario(ci);
+    if (ubc_u > cant_usuarios || ubc_u == -1)
     {
-        aux_U[i]=a_Usuarios[i];
+        cout << "La CI que ingreso no existe." << endl;
     }
+    else
+    {
+
+        fusuario = a_Usuarios[ubc_u]->getter_f();
+        int cantv = a_Usuarios[ubc_u]->getter_cantV();
+        if(cantv==0){
+            cout << "No existen viajes registrados con esa CI." << endl;
+        }
+        else{
+            try
+            {
+                if (fecha_velim.anio < fusuario.anio)
+                {
+                    throw invalid_argument("La fecha es anterior a la del usuario.");
+                }
+                else
+                {
+                    if (fecha_velim.mes < fusuario.mes && fecha_velim.anio == fusuario.anio)
+                    {
+                        throw invalid_argument("La fecha es anterior a la del usuario.");
+                    }
+                    else
+                    {
+                        if (fecha_velim.mes == fusuario.mes && fecha_velim.anio == fusuario.anio && fecha_velim.dia < fusuario.dia)
+                        {
+                            throw invalid_argument("La fecha es anterior a la del usuario.");
+                        }
+                        else
+                        {
+                            do
+                            {
+                                ubc_v2=ubc_v;
+                                aux = a_Usuarios[ubc_u]->getter_viaje(ubc_v);
+                                fecha_vu=aux->getter_f();
+                                //primero de Array
+                                if (ubc_v==0){
+                                    if (fechas(fecha_velim,fecha_vu)){
+                                        if(cantv==1){
+
+                                            a_Usuarios[ubc_u]->setter_delete_v(0);
+                                            cantv = a_Usuarios[ubc_u]->getter_cantV();
+                                            cont++;
+
+                                        }
+                                        else
+                                        {
+
+                                            a_Usuarios[ubc_u]->setter_delete_v(0);
+                                            cantv = a_Usuarios[ubc_u]->getter_cantV();
+                                            cont++;
+                                            while (ubc_v2 < cantv)
+                                            {
+
+                                                if (a_Usuarios[ubc_u]->getter_viaje(ubc_v2 + 1)!=NULL){
+                                                    aux2 = a_Usuarios[ubc_u]->getter_viaje(ubc_v2 + 1);
+                                                    a_Usuarios[ubc_u]->setter_v_ubc(aux2, ubc_v2);
+                                                }
+                                                else{
+                                                    a_Usuarios[ubc_u]->setter_v_ubc(NULL,ubc_v2);
+                                                }
+                                                ubc_v2++;
+                                            }
+                                        }
+                                    }
+                                }
+                                else{
+                                    if (fechas(fecha_velim, fecha_vu))
+                                    {
+                                        a_Usuarios[ubc_u]->setter_delete_v(ubc_v);
+                                        cantv = a_Usuarios[ubc_u]->getter_cantV();
+                                        cont++;
+                                        while (ubc_v2 < cantv)
+                                        {
+                                            if (a_Usuarios[ubc_u]->getter_viaje(ubc_v2 + 1) != NULL)
+                                            {
+                                                aux2 = a_Usuarios[ubc_u]->getter_viaje(ubc_v2 + 1);
+                                                a_Usuarios[ubc_u]->setter_v_ubc(aux2, ubc_v2);
+                                            }
+                                            else
+                                            {
+                                                a_Usuarios[ubc_u]->setter_v_ubc(NULL, ubc_v2);
+                                            }
+                                            ubc_v2++;
+                                        }
+                                    }
+                                }
+                                ubc_v++;
+                            } while (ubc_v < cantv);
+                            cout << "Cantidad de viajes eliminados: " << cont << endl;
+                        }
+                    }
+                }
+            }
+            catch (const std::invalid_argument &ia)
+            {
+                std::cerr << "Invalid argument: " << ia.what() << '\n';
+            }
+        }
+    }
+}
+
+/*
+void eliminarViajes(string ci, const DtFecha& fecha)
+{
+    int a;
+    int b=0;
+    int c=0;
+    int i=0;
+    int cont=0;
 
     DtFecha fusuario;
     DtFecha fecha_vu;
@@ -860,13 +985,13 @@ void eliminarViajes(string ci, const DtFecha& fecha)
     a=BuscarUsuario(ci);
     if(a>cant_usuarios || a==-1)
     {
-
+        cout << "La CI que ingreso no existe." << endl;
     }
     else
     {
 
         fusuario=a_Usuarios[a]->getter_f();
-        int cv=a_Usuarios[a]->getter_cantV()-1;
+        int cantV=a_Usuarios[a]->getter_cantV();
         try
         {
             if(fecha_velim.anio<fusuario.anio)
@@ -887,43 +1012,13 @@ void eliminarViajes(string ci, const DtFecha& fecha)
                     }
                     else
                     {
-                        do
-                        {
-                            aux = a_Usuarios[a]->getter_viaje(b);
-                            fecha_vu=aux->getter_f();
-                            if(fecha_velim.anio==fecha_vu.anio && fecha_velim.mes==fecha_vu.mes && fecha_velim.dia==fecha_vu.dia)
-                            {
-                                c = b;
-                                ConfirmacionViaje(a, c);
-                                
-                                if(c+1==cv){
-                                    //apunta a null
-                                }
-                                else{
-                                    while (c < cv)
-                                    {
-                                        if(c+1==cv){
-                                            aux2 = a_Usuarios[a]->getter_viaje(c);
-                                            a_Usuarios[a]->setter_v_ubc(aux2, c-1);
-                                        }
-                                        else{
-                                            aux2 = a_Usuarios[a]->getter_viaje(c + 1);
-                                            a_Usuarios[a]->setter_v_ubc(aux2, c);
-                                        }
-                                        
-                                        c++;
-                                        
-                                    }
-                                }
-                                cont++;
-                                //delete aux;
-                            }
-                            b++;
-
+                        if(cantV==0){
+                            cout << "El Usuario ingresado no tiene viajes."<< endl;
                         }
-                        while(b<=cv);
-                        cout << "Cantidad de viajes eliminados: " << cont << endl;
-                        a_Usuarios[a]->setter_cv(cv-cont);
+                        else{
+                            cout<< "Cantidad de viajes eliminados: " << conditional_t << endl;
+                            a_Usuarios[a]->setter_cv(cantV-r);
+                        }
                     }
                 }
             }
@@ -936,3 +1031,66 @@ void eliminarViajes(string ci, const DtFecha& fecha)
     }
 }
 
+
+int recursivaEliminarViaje(int ubc_u, int ubc_v, int cantV, int cont, DtFecha f_viajeE){
+
+    int ubc2_v;
+    Viaje *aux;
+    Viaje *aux2;
+    DtFecha f_viaje;
+    int retorno=cont;
+
+    aux = a_Usuarios[ubc_u]->getter_viaje(ubc_v);
+    f_viaje = aux->getter_f();
+    ubc2_v = ubc_u;
+    if(ubc_v<cantV){
+        if ((f_viajeE.anio == f_viaje.anio) && (f_viajeE.mes == f_viaje.mes) && (f_viajeE.dia == f_viaje.dia))
+    {
+        ConfirmacionViaje(ubc_u, ubc_v);
+
+
+        if ((ubc2_v + 1) == cantV)
+        {
+            a_Usuarios[ubc_u]->setter_v_ubc(NULL, ubc2_v);
+            //delete aux;
+            return retorno+1;
+        }
+        else
+        {
+            if ((ubc2_v+1) < cantV)
+            {
+                aux2 = a_Usuarios[ubc_u]->getter_viaje(ubc2_v + 1);
+                a_Usuarios[ubc_u]->setter_v_ubc(aux2, ubc2_v);
+                retorno=recursivaEliminarViaje(ubc_u, ubc_v + 1, cantV, cont+1, f_viajeE);
+                //delete aux;
+            }
+        }
+
+    }
+    else
+    {
+        if (cont>0){
+            if ((ubc_v + 1) == cantV)
+            {
+                a_Usuarios[ubc_u]->setter_v_ubc(NULL, ubc2_v);
+                return retorno;
+            }
+            else
+            {
+                if ((ubc2_v + 1) < cantV)
+                {
+                    aux2 = a_Usuarios[ubc_u]->getter_viaje(ubc2_v + 1);
+                    a_Usuarios[ubc_u]->setter_v_ubc(aux2, ubc2_v);
+                    retorno = recursivaEliminarViaje(ubc_u, ubc_v + 1, cantV, cont, f_viajeE);
+                }
+            }
+        }
+        else{
+            retorno = recursivaEliminarViaje(ubc_u, ubc_v + 1, cantV, cont, f_viajeE);
+        }
+    }
+    }
+
+    return retorno;
+}
+*/

@@ -34,6 +34,12 @@ void Usuario::setter_v_ubc(class Viaje *v, int ubc){
     MisViajes[ubc] = v;
 }
 
+void Usuario::setter_delete_v(int ubc){
+    delete MisViajes[ubc];
+    MisViajes[ubc]=NULL;
+    a--;
+}
+
 void Usuario::setter_cv(int cv)
 {
     a=cv;

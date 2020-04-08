@@ -24,6 +24,7 @@ class Usuario{
         void setter_f (DtFecha f);
         void setter_v (class Viaje *v);
         void setter_v_ubc(class Viaje *v, int ubc);
+        void setter_delete_v(int ubc);
         void setter_cv (int cv);
 
         //Getters

@@ -57,7 +57,6 @@ Viaje::Viaje(DtFecha f,int dur, int dis, Vehiculo *v){
 
 //Destructor
 Viaje::~Viaje(){
-    delete[] vehiculo;
 }
 
 //Setters

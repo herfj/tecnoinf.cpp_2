@@ -9,9 +9,9 @@
 	"definiciones.h"
 	"funciones.cpp"
 
-1586289143 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\definiciones.h
+1586367222 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\definiciones.h
 
-1586313111 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\funciones.cpp
+1586373463 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\funciones.cpp
 	<iostream>
 	<unistd.h>
 	<string.h>
@@ -20,10 +20,10 @@
 	"Viaje.cpp"
 	"Vehiculo.cpp"
 
-1586311419 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\usuario.cpp
+1586371350 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\usuario.cpp
 	"Usuario.h"
 
-1586311421 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\usuario.h
+1586371366 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\usuario.h
 	"definiciones.h"
 	"Viaje.h"
 
@@ -31,7 +31,7 @@
 	"definiciones.h"
 	"Vehiculo.h"
 
-1586309462 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\viaje.cpp
+1586373146 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\viaje.cpp
 	"Viaje.h"
 
 1586288154 c:\users\herfj\onedrive\hernan\f\facultad\3er semestre\pa\labs\g1_lab0\vehiculo.h
